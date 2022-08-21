@@ -1,36 +1,29 @@
-import { init, Sprite, GameLoop } from 'kontra';
+import { init, Sprite, GameLoop, initKeys, keyPressed, load} from 'kontra/kontra.mjs';
+import Monster from './monster';
+import Character from './character'
 
+async function app() {
+  const { canvas } = init();
+  initKeys();
 
-let { canvas } = init();
+  const monster = new Monster(canvas);
+  const character = new Character(canvas);
 
-let monster = Sprite({
-  x: 100,
-  y: -80,
-  color: 'red',
-  width: 20,
-  height: 40,
-  dy: 2
-});
-
-let boat = Sprite({
-  x: (320 - 30) / 2,
-  y: 640 - 40 - 20,
-  color: 'blue',
-  width: 30,
-  height: 40,
-});
-
-let loop = GameLoop({
-  update: () => {
-    monster.update();
-    if (monster.y > canvas.height) {
-      monster.y = -monster.height;
+  const loop = GameLoop({
+    update: () => {
+      monster.fall()
+      character.allowMove()
+      if (character.hasCollided(monster)) {
+        character.flash()
+      }
+    },
+    render: function() {
+      monster.render();
+      character.render();
     }
-  },
-  render: function() {
-    monster.render();
-    boat.render();
-  }
-});
+  });
 
-loop.start();
+  loop.start();
+}
+
+app();

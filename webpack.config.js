@@ -1,6 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ESBuildMinifyPlugin } = require('esbuild-loader')
-
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserJSPlugin = require("terser-webpack-plugin");
 
@@ -22,7 +21,7 @@ module.exports = {
             loader: "esbuild-loader",
             options: {
               loader: 'ts',
-              target: 'es2015'
+              target: 'es2015',
             }
           }
         ],
