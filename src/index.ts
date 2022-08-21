@@ -1,4 +1,4 @@
-import { init, Sprite, GameLoop, initKeys, keyPressed, load} from 'kontra/kontra.mjs';
+import { init, Sprite, GameLoop, initKeys, keyPressed, load, SpriteSheet, Animation } from 'kontra';
 import Monster from './monster';
 import Character from './character'
 
@@ -12,10 +12,8 @@ async function app() {
   const loop = GameLoop({
     update: () => {
       monster.fall()
-      character.allowMove()
-      if (character.hasCollided(monster)) {
-        character.flash()
-      }
+      character.toggleCollisionAnimation(monster);
+      character.update()
     },
     render: function() {
       monster.render();

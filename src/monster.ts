@@ -1,4 +1,4 @@
-import { Sprite } from 'kontra/kontra.mjs';
+import { Sprite } from 'kontra';
 import monster from './assets/monster.svg'
 
 export default class Monster {
