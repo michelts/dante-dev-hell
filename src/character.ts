@@ -41,7 +41,7 @@ export default class Character {
   }
 
   image() {
-    var img = new Image(30, 60);
+    var img = new Image(60, 30);
     img.src = boat;
     return img
   }
