@@ -1,12 +1,13 @@
-import { Sprite, SpriteSheet, Animation, keyPressed, collides } from 'kontra';
+import { Sprite, SpriteSheet, Animation, keyPressed, collides, emit, on } from 'kontra';
 import boat from './assets/boat.svg';
 
 export default class Character {
   canvas: HTMLCanvasElement;
   sprite: Sprite;
-  speed = 2;
+  speed = 3;
 
-  collisionAnimationTimeout: number = 0
+  isColliding = false
+  collisionAnimationTimeout: number = null
 
   constructor(canvas) {
     const width = 30;
@@ -55,8 +56,10 @@ export default class Character {
     this.sprite.update();
     if (this.collisionAnimationTimeout) {
       this.collisionAnimationTimeout--
-    } else {
+    } else if(this.collisionAnimationTimeout === 0) {
+      this.collisionAnimationTimeout = null;
       this.sprite.playAnimation('default')
+      emit('killed', this)
     }
   }
 
@@ -69,11 +72,15 @@ export default class Character {
     }
   }
 
-  toggleCollisionAnimation(monster) {
+  killOnCollide(monster) {
     if(collides(this.sprite, monster.sprite)) {
-      this.collisionAnimationTimeout = 30
-      this.sprite.playAnimation('flash')
+      if(!this.isColliding) {
+        this.isColliding = true
+        this.collisionAnimationTimeout = 30
+        this.sprite.playAnimation('flash')
+      }
+    } else {
+      this.isColliding = false
     }
   }
-
 }
