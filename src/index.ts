@@ -1,19 +1,23 @@
 import { init, Sprite, GameLoop, initKeys, keyPressed, load, SpriteSheet, Animation, on, onKey } from 'kontra';
 import Splash from './splash';
 import Monster from './monster';
+import Monster2 from './monster2';
 import Character from './character'
 import Lifes from './lifes'
 
+const MONSTERS = [Monster, Monster2];
+
 async function app() {
   let play = false;
+  let currentMonster = 0
 
   const { canvas } = init();
   initKeys();
 
   const splash = new Splash(canvas);
-  let monster = new Monster(canvas);
-  let character = new Character(canvas);
-  let lifes = new Lifes(canvas);
+  let monster
+  let character
+  let lifes
 
   const loop = GameLoop({
     update: () => {
@@ -46,9 +50,14 @@ async function app() {
 
   onKey('space', () => {
     play = true;
-    monster = new Monster(canvas);
+    monster = new MONSTERS[currentMonster % MONSTERS.length](canvas);
     character = new Character(canvas);
     lifes = new Lifes(canvas);
+  });
+
+  on('monsterDead', () => {
+    currentMonster += 1
+    monster = new MONSTERS[currentMonster % MONSTERS.length](canvas);
   });
 }
 
