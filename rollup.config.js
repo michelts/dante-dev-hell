@@ -6,14 +6,14 @@ import { uglify } from "rollup-plugin-uglify";
 import copy from 'rollup-plugin-copy';
 import kontra from 'rollup-plugin-kontra';
 
-const sourcemap = false;
+const isProduction = process.env.NODE_ENV === 'production';
 
 export default {
   input: 'src/index.ts',
   output: {
     dir: 'dist/',
     format: 'iife',
-    sourcemap,
+    sourcemap: !isProduction,
   },
   plugins: [
     nodeResolve(),
@@ -29,8 +29,8 @@ export default {
       },
       debug: true
     }),
-    uglify({sourcemap}),
-    analyze(),
+    isProduction && uglify({sourcemap: !isProduction}),
+    isProduction && analyze(),
     copy({
       targets: [
         { src: 'public/index.html', dest: 'dist/' },
