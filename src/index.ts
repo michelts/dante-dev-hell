@@ -4,10 +4,13 @@ import generateMonster from './monsters';
 import Character from './character'
 import Lifes from './lifes'
 
-const monsterGenerator = generateMonster();
-const { canvas } = init();
-window.gameCanvas = canvas;
-initKeys();
+window.gameCanvas = initCanvas()
+
+function initCanvas() {
+  const { canvas } = init();
+  initKeys();
+  return canvas;
+}
 
 async function app() {
   let play = false;
