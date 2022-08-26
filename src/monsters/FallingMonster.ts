@@ -1,12 +1,10 @@
 import { Sprite, emit } from 'kontra';
-import monster from './assets/monster.svg'
+import monster from '../assets/monster.svg'
 
 export default class Monster {
-  canvas: HTMLCanvasElement;
   sprite: Sprite;
 
-  constructor(canvas) {
-    this.canvas = canvas
+  constructor() {
     this.sprite = Sprite({
       x: 100,
       y: -80,
@@ -33,8 +31,7 @@ export default class Monster {
   }
 
   restartWhenOutCanvas() {
-    if (this.sprite.y > this.canvas.height) {
-      // this.sprite.y = -this.sprite.height;
+    if (this.sprite.y > window.gameCanvas.height) {
       emit('monsterDead')
     }
   }

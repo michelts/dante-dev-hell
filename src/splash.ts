@@ -1,16 +1,14 @@
 import { Sprite } from 'kontra';
 
 export default class Splash {
-  canvas: HTMLCanvasElement;
   sprite: Sprite;
 
-  constructor(canvas) {
-    this.canvas = canvas
+  constructor() {
     this.sprite = Sprite({
       x: 0,
       y: 0,
-      width: canvas.width,
-      height: canvas.height,
+      width: window.gameCanvas.width,
+      height: window.gameCanvas.height,
       color: 'blue',
     });
   }

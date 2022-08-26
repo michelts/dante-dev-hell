@@ -1,15 +1,13 @@
 import { Sprite, emit } from 'kontra';
-import monster from './assets/monster.svg'
+import monster from '../assets/monster.svg'
 
 export default class Monster2 {
-  canvas: HTMLCanvasElement;
   sprite: Sprite;
   reverseDirection: boolean
   xSpeed = 1
 
-  constructor(canvas) {
+  constructor() {
     this.reverseDirection = false
-    this.canvas = canvas
     this.sprite = Sprite({
       x: 100,
       y: -80,
@@ -37,15 +35,14 @@ export default class Monster2 {
   }
 
   restartWhenOutCanvas() {
-    if (this.sprite.y > this.canvas.height) {
-      // this.sprite.y = -this.sprite.height;
+    if (this.sprite.y > window.gameCanvas.height) {
       emit('monsterDead')
     }
   }
 
   slideHorizontally() {
     const newPosition = this.sprite.x + this.xSpeed * (this.reverseDirection ? -1 : 1)
-    if ((newPosition < 0) || ((newPosition + this.sprite.width) > this.canvas.width)) {
+    if ((newPosition < 0) || ((newPosition + this.sprite.width) > window.gameCanvas.width)) {
       this.reverseDirection = !this.reverseDirection
     } else {
       this.sprite.x = newPosition

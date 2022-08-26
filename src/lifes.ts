@@ -1,18 +1,16 @@
 import { Sprite } from 'kontra';
 
 export default class Lifes {
-  canvas: HTMLCanvasElement;
   sprites: Array<Sprite>;
   lifesCount = 3;
 
-  constructor(canvas) {
+  constructor() {
     const width = 10
     const height = 10
     const margin = 5
-    this.canvas = canvas
     this.sprites = Array(3).fill(null).map((_, index) => Sprite({
       x: margin * (index + 1) + (width * index),
-      y: canvas.height - height - margin,
+      y: window.gameCanvas.height - height - margin,
       width: 10,
       height: 10,
       color: 'red',

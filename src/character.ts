@@ -2,7 +2,6 @@ import { Sprite, SpriteSheet, Animation, keyPressed, collides, emit, on } from '
 import boat from './assets/boat.svg';
 
 export default class Character {
-  canvas: HTMLCanvasElement;
   sprite: Sprite;
   spriteSheet: SpriteSheet;
   speed = 3;
@@ -10,11 +9,10 @@ export default class Character {
   isColliding = false
   collisionAnimationTimeout: number = null
 
-  constructor(canvas) {
+  constructor() {
     const width = 30;
     const height = 60;
     const margin = 20;
-    this.canvas = canvas
 
     this.spriteSheet = SpriteSheet({
       image: this.image(),
@@ -32,8 +30,8 @@ export default class Character {
     })
 
     this.sprite = Sprite({
-      x: (canvas.width - width) / 2,
-      y: (canvas.height - height) - margin,
+      x: (window.gameCanvas.width - width) / 2,
+      y: (window.gameCanvas.height - height) - margin,
       width,
       height,
       anchor: {x: 0.5, y: 0.5},
