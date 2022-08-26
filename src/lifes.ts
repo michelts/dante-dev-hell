@@ -2,7 +2,7 @@ import { Sprite } from 'kontra';
 
 export default class Lifes {
   canvas: HTMLCanvasElement;
-  sprite: Sprite;
+  sprites: Array<Sprite>;
   lifesCount = 3;
 
   constructor(canvas) {

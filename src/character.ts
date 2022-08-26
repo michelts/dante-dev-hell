@@ -4,6 +4,7 @@ import boat from './assets/boat.svg';
 export default class Character {
   canvas: HTMLCanvasElement;
   sprite: Sprite;
+  spriteSheet: SpriteSheet;
   speed = 3;
 
   isColliding = false

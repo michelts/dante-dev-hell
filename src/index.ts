@@ -40,12 +40,12 @@ async function app() {
   on('killed', () => {
     lifes.discountLife();
     if(!lifes.isLive()) {
-      play = 0;
+      play = false;
     }
   });
 
   onKey('space', () => {
-    play = 1;
+    play = true;
     monster = new Monster(canvas);
     character = new Character(canvas);
     lifes = new Lifes(canvas);
