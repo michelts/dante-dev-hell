@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "target": "ES5",
     "lib": ["DOM", "ES6", "DOM.Iterable", "ScriptHost", "ES2017"],
     "baseUrl": "./",
     "noEmit": false,
