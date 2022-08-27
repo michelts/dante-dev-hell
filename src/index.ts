@@ -13,10 +13,10 @@ function initCanvas() {
 }
 
 async function app() {
-  let play = false;
-  let currentMonster = 0
-
+  const monsterGenerator = generateMonster();
   const splash = new Splash();
+
+  let play = false;
   let monster
   let character
   let lifes
@@ -52,20 +52,24 @@ async function app() {
 
   onKey('space', () => {
     play = true;
-    const {value: MonsterType} = monsterGenerator.next();
-    monster = new MonsterType()
+    monster = monsterGenerator.next().value
     character = new Character();
     lifes = new Lifes();
   });
 
   on('monsterDead', () => {
-    const {value: MonsterType} = monsterGenerator.next();
-    monster = new MonsterType()
+    monster = monsterGenerator.next().value
   });
 
   onKey('esc', () => {
     play = false;
   });
+}
+
+declare global {
+  interface Window {
+    gameCanvas: HTMLCanvasElement
+  }
 }
 
 app();
