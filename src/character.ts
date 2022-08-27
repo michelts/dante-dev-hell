@@ -15,7 +15,7 @@ export default class Character {
   speed = 3;
 
   isColliding = false;
-  collisionAnimationTimeout: number = null;
+  collisionAnimationTimeout: number | null = null;
 
   constructor() {
     const width = 30;

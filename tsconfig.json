@@ -4,7 +4,8 @@
     "baseUrl": "./",
     "noEmit": false,
     "sourceMap": false,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strictNullChecks": true
   },
   "include": ["src/**/*", "assets/**/*", "typedefs/*"]
 }
