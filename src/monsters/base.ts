@@ -22,7 +22,7 @@ export default class BaseMonster {
 
   restartWhenOutCanvas(): void {
     if (this.sprite.y > window.gameCanvas.height) {
-      emit("monsterDead");
+      emit("monsterLeft");
     }
   }
 }

@@ -51,7 +51,7 @@ export default class App {
     onKey("space", this.playPauseGame.bind(this));
     onKey("esc", this.stopGame.bind(this));
     on("killed", this.handleHeroKilled.bind(this));
-    on("monsterDead", this.respawnMonster.bind(this));
+    on("monsterLeft", this.respawnMonster.bind(this));
   }
 
   playPauseGame(): void {
