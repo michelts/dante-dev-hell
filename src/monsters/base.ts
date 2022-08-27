@@ -11,16 +11,16 @@ export default class BaseMonster {
     throw new Error("Not Implemented Yet");
   }
 
-  render() {
+  render(): void {
     this.sprite.render();
   }
 
-  fall() {
+  fall(): void {
     this.sprite.update();
     this.restartWhenOutCanvas();
   }
 
-  restartWhenOutCanvas() {
+  restartWhenOutCanvas(): void {
     if (this.sprite.y > window.gameCanvas.height) {
       emit("monsterDead");
     }

@@ -1,17 +1,6 @@
-import {
-  init,
-  Sprite,
-  GameLoop,
-  initKeys,
-  keyPressed,
-  load,
-  SpriteSheet,
-  Animation,
-  on,
-  onKey,
-} from "kontra";
+import { init, GameLoop, initKeys, on, onKey } from "kontra";
 import Splash from "./splash";
-import generateMonster from "./monsters";
+import generateMonster, { BaseMonster } from "./monsters";
 import Character from "./character";
 import Lifes from "./lifes";
 
@@ -23,14 +12,14 @@ function initCanvas() {
   return canvas;
 }
 
-async function app() {
+function app() {
   const monsterGenerator = generateMonster();
   const splash = new Splash();
 
   let play = false;
-  let monster;
-  let character;
-  let lifes;
+  let monster: BaseMonster;
+  let character: Character;
+  let lifes: Lifes;
 
   const loop = GameLoop({
     update: () => {

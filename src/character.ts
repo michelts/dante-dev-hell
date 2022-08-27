@@ -1,12 +1,5 @@
-import {
-  Sprite,
-  SpriteSheet,
-  Animation,
-  keyPressed,
-  collides,
-  emit,
-  on,
-} from "kontra";
+import { Sprite, SpriteSheet, keyPressed, collides, emit } from "kontra";
+import BaseMonster from "./monsters";
 import boat from "./assets/boat.svg";
 
 export default class Character {
@@ -48,20 +41,23 @@ export default class Character {
     });
   }
 
-  image() {
+  image(): HTMLImage {
     const img = new Image(60, 30);
     img.src = boat;
     return img;
   }
 
-  render() {
+  render(): void {
     this.sprite.render();
   }
 
-  update() {
+  update(): void {
     this.allowMove();
     this.sprite.update();
-    if (this.collisionAnimationTimeout) {
+    if (
+      this.collisionAnimationTimeout != null &&
+      this.collisionAnimationTimeout !== 0
+    ) {
       this.collisionAnimationTimeout--;
     } else if (this.collisionAnimationTimeout === 0) {
       this.collisionAnimationTimeout = null;
@@ -70,7 +66,7 @@ export default class Character {
     }
   }
 
-  allowMove() {
+  allowMove(): void {
     if (keyPressed("arrowleft")) {
       this.sprite.x = this.sprite.x - this.speed;
     }
@@ -79,7 +75,7 @@ export default class Character {
     }
   }
 
-  killOnCollide(monster) {
+  killOnCollide(monster: BaseMonster): void {
     if (collides(this.sprite, monster.sprite)) {
       if (!this.isColliding) {
         this.isColliding = true;

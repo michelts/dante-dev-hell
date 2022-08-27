@@ -6,7 +6,7 @@ const MONSTERS = [FallingMonster, SlidingMonster];
 
 export default function* generateMonster(): Generator<BaseMonster, void, void> {
   let index = 0;
-  while (1) {
+  while (true) {
     const MonsterType = MONSTERS[index % MONSTERS.length];
     yield new MonsterType();
     index++;

@@ -21,11 +21,11 @@ export default class Lifes {
       );
   }
 
-  render() {
+  render(): void {
     this.sprites.map((sprite) => sprite.render());
   }
 
-  update() {
+  update(): void {
     this.sprites.forEach((sprite, index) => {
       if (index < this.lifesCount) {
         sprite.color = "red";
@@ -35,11 +35,11 @@ export default class Lifes {
     });
   }
 
-  discountLife() {
+  discountLife(): void {
     this.lifesCount--;
   }
 
-  isLive() {
+  isLive(): boolean {
     return this.lifesCount > 0;
   }
 }

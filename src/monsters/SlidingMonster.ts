@@ -11,7 +11,7 @@ export default class SlidingMonster extends BaseMonster {
     this.reverseDirection = false;
   }
 
-  getSprite() {
+  getSprite(): Sprite {
     return Sprite({
       x: 100,
       y: -80,
@@ -22,22 +22,22 @@ export default class SlidingMonster extends BaseMonster {
     });
   }
 
-  image() {
+  image(): HTMLImage {
     const img = new Image(30, 30);
     img.src = monster;
     return img;
   }
 
-  render() {
+  render(): void {
     this.sprite.render();
   }
 
-  fall() {
+  fall(): void {
     this.slideHorizontally();
     super.fall();
   }
 
-  slideHorizontally() {
+  slideHorizontally(): void {
     const newPosition =
       this.sprite.x + this.xSpeed * (this.reverseDirection ? -1 : 1);
     if (

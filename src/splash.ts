@@ -13,7 +13,7 @@ export default class Splash {
     });
   }
 
-  render() {
+  render(): void {
     this.sprite.render();
   }
 }

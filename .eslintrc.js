@@ -11,7 +11,12 @@ module.exports = {
       parserOptions: {
         project: ["./tsconfig.json"],
       },
+      rules: {
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": 2,
+      },
     },
   ],
+  ignorePatterns: ["dist/*"],
   rules: {},
 };
