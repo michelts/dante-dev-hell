@@ -6,8 +6,8 @@ export default class SlidingMonster extends BaseMonster {
   reverseDirection: boolean;
   xSpeed = 1;
 
-  constructor() {
-    super();
+  constructor(...args: ConstructorParameters<typeof BaseMonster>) {
+    super(...args);
     this.reverseDirection = false;
   }
 
@@ -17,7 +17,6 @@ export default class SlidingMonster extends BaseMonster {
       y: -80,
       width: 30,
       height: 30,
-      dy: 2,
       image: this.image(),
     });
   }

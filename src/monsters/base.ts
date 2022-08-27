@@ -2,8 +2,10 @@ import { Sprite, emit } from "kontra";
 
 export default class BaseMonster {
   sprite: Sprite;
+  verticalSpeed: number;
 
-  constructor() {
+  constructor({ speed }: { speed: number }) {
+    this.verticalSpeed = speed;
     this.sprite = this.getSprite();
   }
 
@@ -17,6 +19,7 @@ export default class BaseMonster {
 
   fall(): void {
     this.sprite.update();
+    this.sprite.y += 2 * this.verticalSpeed;
     this.restartWhenOutCanvas();
   }
 

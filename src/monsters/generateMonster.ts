@@ -4,13 +4,14 @@ import BaseMonster from "./base";
 
 const MONSTERS = [FallingMonster, SlidingMonster];
 
-export default function* generateMonster(
-  monsters = MONSTERS
-): Generator<BaseMonster, BaseMonster, void> {
-  let index = 0;
-  while (true) {
-    const MonsterType = monsters[index % monsters.length];
-    yield new MonsterType();
-    index++;
+export default function* generateMonster({
+  speed,
+  monsterTypes = MONSTERS,
+}: {
+  speed: number;
+  monsterTypes?: BaseMonster[];
+}): Iterator<BaseMonster, void, void> {
+  for (const MonsterType of monsterTypes) {
+    yield new MonsterType({ speed });
   }
 }

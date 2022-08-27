@@ -9,7 +9,6 @@ export default class FallingMonster extends BaseMonster {
       y: -80,
       width: 30,
       height: 30,
-      dy: 2,
       image: this.image(),
     });
   }

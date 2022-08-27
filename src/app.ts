@@ -1,6 +1,7 @@
 import { GameLoop, on, onKey } from "kontra";
 import Splash from "./splash";
 import generateMonster, { BaseMonster } from "./monsters";
+import generateLevel, { Level } from "./levels";
 import Hero from "./hero";
 import Lifes from "./lifes";
 
@@ -13,9 +14,13 @@ enum GameStatus {
 export default class App {
   gameStatus: GameStatus = GameStatus.Stop;
   splash: Splash;
-  monster: BaseMonster;
-  monsterGenerator: generateMonster;
+
+  monsterGenerator: Iterator<BaseMonster, void, void>;
+  levelGenerator: Iterator<Level, void, void>;
+
+  level: Level
   hero: Hero;
+  monster: BaseMonster;
   lifes: Lifes;
 
   init(): void {
@@ -32,8 +37,8 @@ export default class App {
     if (this.gameStatus === GameStatus.Stop) {
       this.splash.render();
     } else {
-      this.monster.render();
       this.hero.render();
+      this.monster.render();
       this.lifes.render();
     }
   }
@@ -70,7 +75,8 @@ export default class App {
   }
 
   initializeObjects(): void {
-    this.monsterGenerator = generateMonster();
+    this.levelGenerator = generateLevel();
+    this.advanceLevel();
     this.respawnMonster();
     this.hero = new Hero();
     this.lifes = new Lifes();
@@ -84,6 +90,25 @@ export default class App {
   }
 
   respawnMonster(): void {
-    this.monster = this.monsterGenerator.next().value;
+    const { value, done } = this.monsterGenerator.next();
+    if (done === false) {
+      this.monster = value;
+    } else {
+      this.advanceLevel();
+    }
+  }
+
+  advanceLevel(): void {
+    const { value, done } = this.levelGenerator.next();
+    if (done === false) {
+      this.level = value;
+      this.monsterGenerator = generateMonster({ speed: this.level.getSpeed() });
+    } else {
+      this.completeGame();
+    }
+  }
+
+  completeGame(): void {
+    this.stopGame();
   }
 }
