@@ -1,7 +1,7 @@
 import { GameLoop, on, onKey } from "kontra";
 import Splash from "./splash";
 import generateMonster, { BaseMonster } from "./monsters";
-import Hero from "./Hero";
+import Hero from "./hero";
 import Lifes from "./lifes";
 
 enum GameStatus {
