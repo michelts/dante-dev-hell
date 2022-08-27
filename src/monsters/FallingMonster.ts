@@ -14,7 +14,7 @@ export default class FallingMonster extends BaseMonster {
     });
   }
 
-  image(): HTMLImage {
+  image(): HTMLImageElement {
     const img = new Image(30, 30);
     img.src = monster;
     return img;

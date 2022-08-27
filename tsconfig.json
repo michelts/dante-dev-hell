@@ -5,7 +5,8 @@
     "noEmit": false,
     "sourceMap": false,
     "esModuleInterop": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "noImplicitAny": true
   },
   "include": ["src/**/*", "assets/**/*", "typedefs/*"]
 }

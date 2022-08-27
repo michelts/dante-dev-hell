@@ -1,5 +1,5 @@
 import { Sprite, SpriteSheet, keyPressed, collides, emit } from "kontra";
-import BaseMonster from "./monsters";
+import { BaseMonster } from "./monsters";
 import boat from "./assets/boat.svg";
 
 export default class Character {
@@ -41,7 +41,7 @@ export default class Character {
     });
   }
 
-  image(): HTMLImage {
+  image(): HTMLImageElement {
     const img = new Image(60, 30);
     img.src = boat;
     return img;
