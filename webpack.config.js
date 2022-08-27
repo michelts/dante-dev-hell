@@ -1,15 +1,15 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { ESBuildMinifyPlugin } = require('esbuild-loader')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { ESBuildMinifyPlugin } = require("esbuild-loader");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserJSPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   optimization: {
-    minimizer: [new ESBuildMinifyPlugin({ target: 'es2015' })]
+    minimizer: [new ESBuildMinifyPlugin({ target: "es2015" })],
   },
   plugins: [
     new HtmlWebpackPlugin({ template: "public/index.html", inject: "body" }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
   ],
   resolve: { extensions: [".ts", ".js"] },
   module: {
@@ -20,10 +20,10 @@ module.exports = {
           {
             loader: "esbuild-loader",
             options: {
-              loader: 'ts',
-              target: 'es2015',
-            }
-          }
+              loader: "ts",
+              target: "es2015",
+            },
+          },
         ],
         exclude: /node_modules/,
       },
@@ -32,17 +32,17 @@ module.exports = {
         use: [
           {
             loader: "url-loader",
-          }
-        ]
-      }
-    ]
+          },
+        ],
+      },
+    ],
   },
-  mode: 'development',
+  mode: "development",
   devtool: "eval-source-map",
   devServer: {
-    contentBase: './dist',
+    contentBase: "./dist",
     hot: true,
     inline: false,
-    host: "0.0.0.0"
+    host: "0.0.0.0",
   },
 };

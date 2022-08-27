@@ -1,6 +1,6 @@
-import { Sprite } from 'kontra';
-import BaseMonster from './base';
-import monster from '../assets/monster.svg'
+import { Sprite } from "kontra";
+import BaseMonster from "./base";
+import monster from "../assets/monster.svg";
 
 export default class FallingMonster extends BaseMonster {
   getSprite() {
@@ -11,12 +11,12 @@ export default class FallingMonster extends BaseMonster {
       height: 30,
       dy: 2,
       image: this.image(),
-    })
+    });
   }
 
   image() {
-    var img = new Image(30, 30);
+    const img = new Image(30, 30);
     img.src = monster;
-    return img
+    return img;
   }
 }

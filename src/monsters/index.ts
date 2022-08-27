@@ -1,3 +1,3 @@
-import generateMonster from './generateMonster';
+import generateMonster from "./generateMonster";
 
 export default generateMonster;

@@ -1,18 +1,18 @@
-import { Sprite, emit } from 'kontra';
+import { Sprite, emit } from "kontra";
 
 export default class BaseMonster {
   sprite: Sprite;
 
   constructor() {
-    this.sprite = this.getSprite()
+    this.sprite = this.getSprite();
   }
 
   getSprite(): Sprite {
-    throw new Error('Not Implemented Yet');
+    throw new Error("Not Implemented Yet");
   }
 
   render() {
-    this.sprite.render()
+    this.sprite.render();
   }
 
   fall() {
@@ -22,7 +22,7 @@ export default class BaseMonster {
 
   restartWhenOutCanvas() {
     if (this.sprite.y > window.gameCanvas.height) {
-      emit('monsterDead')
+      emit("monsterDead");
     }
   }
 }

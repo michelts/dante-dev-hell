@@ -1,4 +1,4 @@
-import { Sprite } from 'kontra';
+import { Sprite } from "kontra";
 
 export default class Splash {
   sprite: Sprite;
@@ -9,11 +9,11 @@ export default class Splash {
       y: 0,
       width: window.gameCanvas.width,
       height: window.gameCanvas.height,
-      color: 'blue',
+      color: "blue",
     });
   }
 
   render() {
-    this.sprite.render()
+    this.sprite.render();
   }
 }

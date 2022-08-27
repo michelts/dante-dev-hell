@@ -1,10 +1,21 @@
-import { init, Sprite, GameLoop, initKeys, keyPressed, load, SpriteSheet, Animation, on, onKey } from 'kontra';
-import Splash from './splash';
-import generateMonster from './monsters';
-import Character from './character'
-import Lifes from './lifes'
+import {
+  init,
+  Sprite,
+  GameLoop,
+  initKeys,
+  keyPressed,
+  load,
+  SpriteSheet,
+  Animation,
+  on,
+  onKey,
+} from "kontra";
+import Splash from "./splash";
+import generateMonster from "./monsters";
+import Character from "./character";
+import Lifes from "./lifes";
 
-window.gameCanvas = initCanvas()
+window.gameCanvas = initCanvas();
 
 function initCanvas() {
   const { canvas } = init();
@@ -17,58 +28,58 @@ async function app() {
   const splash = new Splash();
 
   let play = false;
-  let monster
-  let character
-  let lifes
+  let monster;
+  let character;
+  let lifes;
 
   const loop = GameLoop({
     update: () => {
-      if(play) {
-        monster.fall()
+      if (play) {
+        monster.fall();
         character.killOnCollide(monster);
-        character.update()
-        lifes.update()
+        character.update();
+        lifes.update();
       }
     },
-    render: function() {
-      if(play) {
+    render: function () {
+      if (play) {
         monster.render();
         character.render();
         lifes.render();
       } else {
         splash.render();
       }
-    }
+    },
   });
 
   loop.start();
 
-  on('killed', () => {
+  on("killed", () => {
     lifes.discountLife();
-    if(!lifes.isLive()) {
+    if (!lifes.isLive()) {
       play = false;
     }
   });
 
-  onKey('space', () => {
+  onKey("space", () => {
     play = true;
-    monster = monsterGenerator.next().value
+    monster = monsterGenerator.next().value;
     character = new Character();
     lifes = new Lifes();
   });
 
-  on('monsterDead', () => {
-    monster = monsterGenerator.next().value
+  on("monsterDead", () => {
+    monster = monsterGenerator.next().value;
   });
 
-  onKey('esc', () => {
+  onKey("esc", () => {
     play = false;
   });
 }
 
 declare global {
   interface Window {
-    gameCanvas: HTMLCanvasElement
+    gameCanvas: HTMLCanvasElement;
   }
 }
 
