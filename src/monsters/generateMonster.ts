@@ -4,14 +4,12 @@ import BaseMonster from "./base";
 
 const MONSTERS = [FallingMonster, SlidingMonster];
 
-export default function* generateMonster(): Generator<
-  BaseMonster,
-  BaseMonster,
-  void
-> {
+export default function* generateMonster(
+  monsters = MONSTERS
+): Generator<BaseMonster, BaseMonster, void> {
   let index = 0;
   while (true) {
-    const MonsterType = MONSTERS[index % MONSTERS.length];
+    const MonsterType = monsters[index % monsters.length];
     yield new MonsterType();
     index++;
   }
