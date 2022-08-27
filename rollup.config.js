@@ -19,16 +19,17 @@ export default {
     nodeResolve(),
     esbuild(),
     url(),
-    kontra({
-      gameObject: {
-        velocity: true,
-      },
-      sprite: {
-        image: true,
-        animation: true,
-      },
-      debug: true,
-    }),
+    isProduction &&
+      kontra({
+        gameObject: {
+          velocity: true,
+        },
+        sprite: {
+          image: true,
+          animation: true,
+        },
+        debug: true,
+      }),
     isProduction && uglify({ sourcemap: !isProduction }),
     isProduction && analyze(),
     copy({
