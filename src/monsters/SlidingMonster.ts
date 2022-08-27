@@ -4,7 +4,6 @@ import monster from "../assets/monster.svg";
 
 export default class SlidingMonster extends BaseMonster {
   reverseDirection: boolean;
-  xSpeed = 1;
 
   constructor(...args: ConstructorParameters<typeof BaseMonster>) {
     super(...args);
@@ -38,7 +37,7 @@ export default class SlidingMonster extends BaseMonster {
 
   slideHorizontally(): void {
     const newPosition =
-      this.sprite.x + this.xSpeed * (this.reverseDirection ? -1 : 1);
+      this.sprite.x + this.verticalSpeed * (this.reverseDirection ? -1 : 1);
     if (
       newPosition < 0 ||
       newPosition + this.sprite.width > window.gameCanvas.width

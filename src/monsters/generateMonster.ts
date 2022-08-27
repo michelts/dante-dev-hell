@@ -6,12 +6,10 @@ const MONSTERS = [FallingMonster, SlidingMonster];
 
 export default function* generateMonster({
   speed,
-  monsterTypes = MONSTERS,
 }: {
   speed: number;
-  monsterTypes?: BaseMonster[];
 }): Iterator<BaseMonster, void, void> {
-  for (const MonsterType of monsterTypes) {
+  for (const MonsterType of MONSTERS) {
     yield new MonsterType({ speed });
   }
 }
