@@ -1,3 +1,3 @@
-import { makeConfig } from "./rollup.dev.config";
+import makeConfig from "./rollup.base.config";
 
 export default makeConfig({ isProduction: true });
