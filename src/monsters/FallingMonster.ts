@@ -1,11 +1,10 @@
-import { Sprite, emit } from 'kontra';
+import { Sprite } from 'kontra';
+import BaseMonster from './base';
 import monster from '../assets/monster.svg'
 
-export default class Monster {
-  sprite: Sprite;
-
-  constructor() {
-    this.sprite = Sprite({
+export default class FallingMonster extends BaseMonster {
+  getSprite() {
+    return Sprite({
       x: 100,
       y: -80,
       width: 30,
@@ -19,20 +18,5 @@ export default class Monster {
     var img = new Image(30, 30);
     img.src = monster;
     return img
-  }
-
-  render() {
-    this.sprite.render()
-  }
-
-  fall() {
-    this.sprite.update();
-    this.restartWhenOutCanvas();
-  }
-
-  restartWhenOutCanvas() {
-    if (this.sprite.y > window.gameCanvas.height) {
-      emit('monsterDead')
-    }
   }
 }

@@ -1,14 +1,18 @@
-import { Sprite, emit } from 'kontra';
+import { Sprite } from 'kontra';
+import BaseMonster from './base';
 import monster from '../assets/monster.svg'
 
-export default class Monster2 {
-  sprite: Sprite;
+export default class SlidingMonster extends BaseMonster {
   reverseDirection: boolean
   xSpeed = 1
 
   constructor() {
+    super()
     this.reverseDirection = false
-    this.sprite = Sprite({
+  }
+
+  getSprite() {
+    return Sprite({
       x: 100,
       y: -80,
       width: 30,
@@ -29,15 +33,8 @@ export default class Monster2 {
   }
 
   fall() {
-    this.sprite.update();
-    this.slideHorizontally();
-    this.restartWhenOutCanvas();
-  }
-
-  restartWhenOutCanvas() {
-    if (this.sprite.y > window.gameCanvas.height) {
-      emit('monsterDead')
-    }
+    this.slideHorizontally()
+    super.fall()
   }
 
   slideHorizontally() {
