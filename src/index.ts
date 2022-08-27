@@ -10,8 +10,14 @@ function initCanvas() {
   return canvas;
 }
 
+enum GameStatus {
+  Play,
+  Pause,
+  Stop,
+}
+
 class App {
-  play: boolean | null = null;
+  gameStatus: GameStatus = GameStatus.Stop;
   splash: Splash;
   monster: BaseMonster;
   monsterGenerator: generateMonster;
@@ -29,17 +35,17 @@ class App {
   }
 
   render() {
-    if (this.play === true) {
+    if (this.gameStatus === GameStatus.Stop) {
+      this.splash.render();
+    } else {
       this.monster.render();
       this.character.render();
       this.lifes.render();
-    } else {
-      this.splash.render();
     }
   }
 
   update() {
-    if (this.play === true) {
+    if (this.gameStatus === GameStatus.Play) {
       this.monster.fall();
       this.character.killOnCollide(this.monster);
       this.character.update();
@@ -55,16 +61,18 @@ class App {
   }
 
   playPauseGame() {
-    if (this.play === null) {
+    if (this.gameStatus === GameStatus.Stop) {
       this.initializeObjects();
-      this.play = true;
+    }
+    if (this.gameStatus === GameStatus.Play) {
+      this.gameStatus = GameStatus.Pause;
     } else {
-      this.play = !this.play;
+      this.gameStatus = GameStatus.Play;
     }
   }
 
   stopGame() {
-    this.play = null;
+    this.gameStatus = GameStatus.Stop;
   }
 
   initializeObjects() {
@@ -77,7 +85,7 @@ class App {
   handleHeroKilled() {
     this.lifes.discountLife();
     if (!this.lifes.isLive()) {
-      this.play = false;
+      this.stopGame();
     }
   }
 
