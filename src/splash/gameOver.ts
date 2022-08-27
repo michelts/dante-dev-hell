@@ -1,6 +1,6 @@
 import { Sprite } from "kontra";
 
-export default class Splash {
+export default class GameOverSplash {
   sprite: Sprite;
 
   constructor() {
@@ -9,7 +9,7 @@ export default class Splash {
       y: 0,
       width: window.gameCanvas.width,
       height: window.gameCanvas.height,
-      color: "blue",
+      color: "red",
     });
   }
 
