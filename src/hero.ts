@@ -2,7 +2,7 @@ import { Sprite, SpriteSheet, keyPressed, collides, emit } from "kontra";
 import { BaseMonster } from "./monsters";
 import boat from "./assets/boat.svg";
 
-export default class Character {
+export default class Hero {
   sprite: Sprite;
   spriteSheet: SpriteSheet;
   speed = 3;

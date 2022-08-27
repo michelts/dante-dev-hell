@@ -1,7 +1,7 @@
 import { GameLoop, on, onKey } from "kontra";
 import Splash from "./splash";
 import generateMonster, { BaseMonster } from "./monsters";
-import Character from "./character";
+import Hero from "./Hero";
 import Lifes from "./lifes";
 
 enum GameStatus {
@@ -15,7 +15,7 @@ export default class App {
   splash: Splash;
   monster: BaseMonster;
   monsterGenerator: generateMonster;
-  character: Character;
+  hero: Hero;
   lifes: Lifes;
 
   init(): void {
@@ -33,7 +33,7 @@ export default class App {
       this.splash.render();
     } else {
       this.monster.render();
-      this.character.render();
+      this.hero.render();
       this.lifes.render();
     }
   }
@@ -41,8 +41,8 @@ export default class App {
   update(): void {
     if (this.gameStatus === GameStatus.Play) {
       this.monster.fall();
-      this.character.killOnCollide(this.monster);
-      this.character.update();
+      this.hero.killOnCollide(this.monster);
+      this.hero.update();
       this.lifes.update();
     }
   }
@@ -72,7 +72,7 @@ export default class App {
   initializeObjects(): void {
     this.monsterGenerator = generateMonster();
     this.respawnMonster();
-    this.character = new Character();
+    this.hero = new Hero();
     this.lifes = new Lifes();
   }
 
