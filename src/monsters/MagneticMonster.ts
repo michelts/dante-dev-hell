@@ -1,8 +1,16 @@
 import { Sprite } from "kontra";
+import Hero from "../hero";
 import BaseMonster from "./base";
 import monster from "../assets/monster.svg";
 
 export default class MagneticMonster extends BaseMonster {
+  slideSpeed: number;
+
+  constructor(...args: ConstructorParameters<typeof BaseMonster>) {
+    super(...args);
+    this.slideSpeed = Math.sqrt(this.verticalSpeed);
+  }
+
   getSprite(): Sprite {
     return Sprite({
       x: 100,
@@ -19,17 +27,16 @@ export default class MagneticMonster extends BaseMonster {
     return img;
   }
 
-  fall(hero): void {
+  fall(hero: Hero): void {
     const heroCenter = hero.sprite.x + hero.sprite.width / 2;
     const monsterCenter = this.sprite.x + this.sprite.width / 2;
-    let movement = 0
+    let movement = 0;
     if (monsterCenter < heroCenter) {
-      movement = 2 * this.verticalSpeed
+      movement = this.slideSpeed;
     } else if (monsterCenter > heroCenter) {
-      movement = -2 * this.verticalSpeed
+      movement = -1 * this.slideSpeed;
     }
-    console.log(heroCenter, monsterCenter, movement)
-    this.sprite.x += movement
-    super.fall()
+    this.sprite.x += movement;
+    super.fall();
   }
 }
