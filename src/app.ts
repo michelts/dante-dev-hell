@@ -66,7 +66,7 @@ export default class App {
 
   private update() {
     if (this.gameStatus === GameStatus.Play) {
-      this.monster.fall();
+      this.monster.fall(this.hero);
       this.hero.killOnCollide(this.monster);
       this.hero.update();
       this.lifes.update();
