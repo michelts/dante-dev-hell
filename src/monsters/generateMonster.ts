@@ -1,9 +1,10 @@
 import FallingMonster from "./FallingMonster";
 import SlidingMonster from "./SlidingMonster";
 import MagneticMonster from "./MagneticMonster";
+import TeleportingMonster from "./TeleportingMonster";
 import BaseMonster from "./base";
 
-const MONSTERS = [FallingMonster, SlidingMonster, MagneticMonster];
+const MONSTERS = [FallingMonster, SlidingMonster, MagneticMonster, TeleportingMonster];
 
 export default function* generateMonster({
   speed,
