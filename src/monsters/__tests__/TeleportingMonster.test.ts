@@ -24,7 +24,7 @@ it("should teleport to the hero position after crossing the middle of the screen
   expect(monster.sprite.x).toEqual(leftPosition);
 });
 
-it("should not cross the borders of the screen if the hero is thinner", () => {
+it("should not cross the right border of the screen if the hero is thinner", () => {
   const leftPosition = 310;
   const speed = 2;
   const monster = new TeleportingMonster({ speed });
@@ -43,6 +43,26 @@ it("should not cross the borders of the screen if the hero is thinner", () => {
   hero.sprite.x -= 10;
   monster.fall(hero);
   expect(monster.sprite.x).toEqual(leftPosition - outOfBorderCompensation);
+});
+
+it("should not cross the left border of the screen if the hero is thinner", () => {
+  const leftPosition = 0;
+  const speed = 2;
+  const monster = new TeleportingMonster({ speed });
+  const { x, y } = monster.sprite;
+  const hero = { sprite: { width: 10, x: leftPosition } };
+  let count = 1;
+  while (monster.sprite.x === x) {
+    monster.fall(hero);
+    expect(monster.sprite.y).toEqual(y + 2 * speed * count);
+    count++;
+  }
+  expect(monster.sprite.x).toEqual(0);
+
+  // moving out of sight won't cause a new teleport
+  hero.sprite.x += 10;
+  monster.fall(hero);
+  expect(monster.sprite.x).toEqual(0);
 });
 
 xit("should keep the x position if aligned with the hero position", () => {

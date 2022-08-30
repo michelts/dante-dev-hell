@@ -33,8 +33,7 @@ export default class TeleportingMonster extends BaseMonster {
     const heroCenter = hero.sprite.x + hero.sprite.width / 2;
     const newLeftPosition = heroCenter - this.sprite.width / 2;
     const maxPosition = window.gameCanvas.width - this.sprite.width;
-    this.sprite.x =
-      newLeftPosition <= maxPosition ? newLeftPosition : maxPosition;
+    this.sprite.x = Math.min(Math.max(0, newLeftPosition), maxPosition); // clamp
     this.teleported = true;
   }
 }
