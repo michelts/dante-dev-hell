@@ -35,7 +35,7 @@ export default class Hero {
       y: window.gameCanvas.height - height - margin,
       width,
       height,
-      anchor: { x: 0.5, y: 0.5 },
+      anchor: { x: 0, y: 0 },
       spriteSheet: this.spriteSheet,
       animations: this.spriteSheet.animations,
     });
@@ -68,10 +68,24 @@ export default class Hero {
 
   allowMove(): void {
     if (keyPressed("arrowleft")) {
-      this.sprite.x = this.sprite.x - this.speed;
+      this.moveLeft();
     }
     if (keyPressed("arrowright")) {
-      this.sprite.x = this.sprite.x + this.speed;
+      this.moveRight();
+    }
+  }
+
+  private moveLeft() {
+    const newX = this.sprite.x - this.speed;
+    if (newX >= 0) {
+      this.sprite.x = newX;
+    }
+  }
+
+  private moveRight() {
+    const newX = this.sprite.x + this.speed;
+    if (newX <= window.gameCanvas.width - this.sprite.width) {
+      this.sprite.x = newX;
     }
   }
 
