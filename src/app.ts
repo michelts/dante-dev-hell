@@ -1,5 +1,4 @@
 import { GameLoop, on, onKey } from "kontra";
-import { StandBySplash, GameOverSplash, CompleteSplash } from "./splash";
 import { GameStatus } from "./types";
 import Screen from "./screen";
 import generateMonster, { BaseMonster } from "./monsters";
@@ -21,7 +20,6 @@ export default class App {
 
   init(): void {
     this.screen = new Screen();
-    this.splash = new StandBySplash();
     const loop = GameLoop({
       update: this.update.bind(this),
       render: this.render.bind(this),
@@ -108,17 +106,14 @@ export default class App {
   }
 
   private stopGame() {
-    this.splash = new StandBySplash();
     this.gameStatus = GameStatus.Stop;
   }
 
   private gameOver() {
-    this.splash = new GameOverSplash();
     this.gameStatus = GameStatus.GameOver;
   }
 
   private completeGame() {
-    this.splash = new CompleteSplash();
     this.gameStatus = GameStatus.Complete;
   }
 }
