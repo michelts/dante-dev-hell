@@ -1,4 +1,5 @@
 import { GameLoop, on, onKey } from "kontra";
+import { Layers, toggleLayer } from './layers';
 import { StandBySplash, GameOverSplash, CompleteSplash } from "./splash";
 import generateMonster, { BaseMonster } from "./monsters";
 import generateLevel, { Level } from "./levels";
@@ -47,18 +48,19 @@ export default class App {
   }
 
   private renderNotStarted() {
-    this.splash.render();
+    toggleLayer(Layers.NotStarted);
   }
 
   private renderComplete() {
-    this.splash.render();
+    toggleLayer(Layers.Complete);
   }
 
   private renderGameOver() {
-    this.splash.render();
+    toggleLayer(Layers.GameOver);
   }
 
   private renderInProgress() {
+    toggleLayer(Layers.Game);
     this.hero.render();
     this.monster.render();
     this.lifes.render();

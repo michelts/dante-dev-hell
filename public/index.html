@@ -10,14 +10,58 @@
         height: 100%;
         margin: 0;
         padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-      canvas {
+      .layers, .layer {
+        width: 300px;
+        height: 400px;
+      }
+      .layers {
+        position: relative;
+      }
+      .layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        visibility: hidden;
+        box-sizing: border-box;
         background: #ccc;
+      }
+      .layer:first-child {
+        visibility: visible;
+      }
+      .text {
+        background: #222;
+        color: green;
+        font-family: monospace;
+        padding: 10px;
       }
     </style>
   </head>
   <body>
-    <canvas width="300" height="400" />
+    <div class="layers">
+      <div class="layer text" id="ns">
+        <h1>Dante's Dev Hell</h1>
+        <p>You are Dante, a developer who died and went to hell.</p>
+        <p>Yeah, how could you imagine those silly jokes about javascript would bring you there?</p>
+        <p>With the help of your mentor Virgilio, seek your redemption sailing the Aqueronte's river through the deeps of the programming hell!</p>
+        <a>Tap or press any key to start</a>
+      </div>
+      <canvas class="layer" id="gp" width="300" height="400"></canvas>
+      <div class="layer text" id="go">
+        <h1>Dante's Dev Hell</h1>
+        <p>You were consumed by the hatred against PHP typing system.</p>
+        <a>Tap or press any key to try again</a>
+      </div>
+      <div class="layer text" id="cp">
+        <h1>Dante's Dev Hell</h1>
+        <p>Congrats! You crossed the deeps of the developer hell and got your redemption!</p>
+        <p>You may now live your life with kindness and respect to all the languages, even PHP.</p>
+        <a>Tap or press any key to play again</a>
+      </div>
+    </div>
     <script src="index.js"></script>
   </body>
 </html>

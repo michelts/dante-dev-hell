@@ -10,6 +10,7 @@ declare global {
 function initCanvas() {
   const { canvas } = init();
   initKeys();
+  console.log("Initialization");
   return canvas;
 }
 
