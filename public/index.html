@@ -14,6 +14,24 @@
         align-items: center;
         justify-content: center;
       }
+      h1, p {
+        margin: 0 0 12px 0;
+        font-size: 14px;
+        color: #b7b7b7;
+      }
+      h1 {
+        font-size: 24px;
+        color: #87ff00;
+      }
+      b {
+        color: #ff8700;
+      }
+      i {
+        color: #af5fff;
+      }
+      u {
+        color: #5fd7ff;
+      }
       .layers, .layer {
         width: 300px;
         height: 400px;
@@ -27,40 +45,21 @@
         left: 0;
         visibility: hidden;
         box-sizing: border-box;
-        background: #ccc;
+        background: #222;
       }
       .layer:first-child {
         visibility: visible;
       }
       .text {
-        background: #222;
-        color: green;
         font-family: monospace;
-        padding: 10px;
+        padding: 16px;
       }
     </style>
   </head>
   <body>
     <div class="layers">
-      <div class="layer text" id="ns">
-        <h1>Dante's Dev Hell</h1>
-        <p>You are Dante, a developer who died and went to hell.</p>
-        <p>Yeah, how could you imagine those silly jokes about javascript would bring you there?</p>
-        <p>With the help of your mentor Virgilio, seek your redemption sailing the Aqueronte's river through the deeps of the programming hell!</p>
-        <a>Tap or press any key to start</a>
-      </div>
-      <canvas class="layer" id="gp" width="300" height="400"></canvas>
-      <div class="layer text" id="go">
-        <h1>Dante's Dev Hell</h1>
-        <p>You were consumed by the hatred against PHP typing system.</p>
-        <a>Tap or press any key to try again</a>
-      </div>
-      <div class="layer text" id="cp">
-        <h1>Dante's Dev Hell</h1>
-        <p>Congrats! You crossed the deeps of the developer hell and got your redemption!</p>
-        <p>You may now live your life with kindness and respect to all the languages, even PHP.</p>
-        <a>Tap or press any key to play again</a>
-      </div>
+      <div class="layer text" id="info"></div>
+      <canvas class="layer" id="game" width="300" height="400"></canvas>
     </div>
     <script src="index.js"></script>
   </body>

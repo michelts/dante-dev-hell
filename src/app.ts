@@ -1,22 +1,15 @@
 import { GameLoop, on, onKey } from "kontra";
-import { Layers, toggleLayer } from './layers';
 import { StandBySplash, GameOverSplash, CompleteSplash } from "./splash";
+import { GameStatus } from "./types";
+import Screen from "./screen";
 import generateMonster, { BaseMonster } from "./monsters";
 import generateLevel, { Level } from "./levels";
 import Hero from "./hero";
 import Lifes from "./lifes";
 
-enum GameStatus {
-  Play,
-  Pause,
-  Stop,
-  Complete,
-  GameOver,
-}
-
 export default class App {
   private gameStatus: GameStatus = GameStatus.Stop;
-  private splash: StandBySplash | GameOverSplash | CompleteSplash;
+  private screen: Screen;
 
   private monsterGenerator: Iterator<BaseMonster, void, void>;
   private levelGenerator: Iterator<Level, void, void>;
@@ -27,6 +20,7 @@ export default class App {
   private lifes: Lifes;
 
   init(): void {
+    this.screen = new Screen();
     this.splash = new StandBySplash();
     const loop = GameLoop({
       update: this.update.bind(this),
@@ -37,30 +31,16 @@ export default class App {
   }
 
   private render() {
-    const renderFuncs = {
-      [GameStatus.Stop]: this.renderNotStarted,
-      [GameStatus.Play]: this.renderInProgress,
-      [GameStatus.Pause]: this.renderInProgress,
-      [GameStatus.Complete]: this.renderComplete,
-      [GameStatus.GameOver]: this.renderGameOver,
-    };
-    renderFuncs[this.gameStatus].bind(this)();
+    this.screen.render(this.gameStatus);
+    if (
+      this.gameStatus === GameStatus.Play ||
+      this.gameStatus === GameStatus.Pause
+    ) {
+      this.renderGameObjects();
+    }
   }
 
-  private renderNotStarted() {
-    toggleLayer(Layers.NotStarted);
-  }
-
-  private renderComplete() {
-    toggleLayer(Layers.Complete);
-  }
-
-  private renderGameOver() {
-    toggleLayer(Layers.GameOver);
-  }
-
-  private renderInProgress() {
-    toggleLayer(Layers.Game);
+  private renderGameObjects() {
     this.hero.render();
     this.monster.render();
     this.lifes.render();
