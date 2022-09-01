@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "rollup -c rollup.dev.config.js -w",
-    "build": "rollup -c rollup.prod.config.js && zip -9 -r dist.zip dist/ && du -b dist.zip",
+    "start": "rollup -c rollup.config.js --environment BUILD:dev -w",
+    "build": "rollup -c rollup.config.js --environment BUILD:prod && zip -9 -r dist.zip dist/ && du -b dist.zip",
     "test": "jest",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit --skipLibCheck"
