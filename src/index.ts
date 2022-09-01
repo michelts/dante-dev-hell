@@ -8,9 +8,18 @@ declare global {
 }
 
 function initCanvas() {
-  const { canvas } = init();
+  const canvas = createCanvas();
+  init(canvas);
   initKeys();
-  console.log("Initialization");
+  return canvas;
+}
+
+function createCanvas() {
+  const container = document.getElementById("game");
+  const canvas = document.createElement("canvas");
+  canvas.setAttribute("width", container.offsetWidth);
+  canvas.setAttribute("height", container.offsetHeight);
+  container.appendChild(canvas);
   return canvas;
 }
 
