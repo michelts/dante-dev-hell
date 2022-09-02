@@ -1,7 +1,7 @@
-import FallingMonster from "./FallingMonster";
-import SlidingMonster from "./SlidingMonster";
-import MagneticMonster from "./MagneticMonster";
-import TeleportingMonster from "./TeleportingMonster";
+import FallingMonster from "./fallingMonster";
+import SlidingMonster from "./slidingMonster";
+import MagneticMonster from "./magneticMonster";
+import TeleportingMonster from "./teleportingMonster";
 import BaseMonster from "./base";
 
 const MONSTERS = [FallingMonster, SlidingMonster, MagneticMonster, TeleportingMonster];

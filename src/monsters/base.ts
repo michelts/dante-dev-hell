@@ -1,4 +1,5 @@
 import { Sprite, emit } from "kontra";
+import monster from "../assets/monster.svg";
 
 export default class BaseMonster {
   sprite: Sprite;
@@ -10,7 +11,19 @@ export default class BaseMonster {
   }
 
   getSprite(): Sprite {
-    throw new Error("Not Implemented Yet");
+    return Sprite({
+      x: 100,
+      y: -80,
+      width: 30,
+      height: 30,
+      image: this.image(),
+    });
+  }
+
+  image(): HTMLImageElement {
+    const img = new Image(30, 30);
+    img.src = monster;
+    return img;
   }
 
   render(): void {
