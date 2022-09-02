@@ -1,4 +1,4 @@
-import TeleportingMonster from "../TeleportingMonster";
+import TeleportingMonster from "../teleportingMonster";
 
 beforeEach(() => {
   window.gameCanvas = { width: 320, height: 480 };

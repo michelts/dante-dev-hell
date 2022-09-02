@@ -1,4 +1,4 @@
-import FallingMonster from "../FallingMonster";
+import FallingMonster from "../fallingMonster";
 
 beforeEach(() => {
   window.gameCanvas = { width: 320, height: 480 };

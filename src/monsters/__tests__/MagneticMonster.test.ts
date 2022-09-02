@@ -1,4 +1,4 @@
-import MagneticMonster from "../MagneticMonster";
+import MagneticMonster from "../magneticMonster";
 
 beforeEach(() => {
   window.gameCanvas = { width: 320, height: 480 };
