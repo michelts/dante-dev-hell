@@ -44,9 +44,9 @@
         position: absolute;
         top: 0;
         left: 0;
-        visibility: hidden;
         box-sizing: border-box;
         background: #222;
+        z-index: 1;
       }
       .layer:first-child {
         visibility: visible;
@@ -54,6 +54,8 @@
       .text {
         font-family: monospace;
         padding: 16px;
+        pointer-events: none;
+        z-index: 2;
       }
     </style>
   </head>
