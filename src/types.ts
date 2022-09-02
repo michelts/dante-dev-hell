@@ -5,3 +5,13 @@ export enum GameStatus {
   Complete,
   GameOver,
 }
+
+export enum Language {
+  Python,
+  Ruby,
+  Javascript,
+  C,
+  Malbolge,
+  HolyC,
+  Assembly,
+}
