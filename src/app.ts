@@ -1,8 +1,9 @@
-import { GameLoop, on, onKey, onPointer, pointerOver } from "kontra";
+import { GameLoop, on, onKey, onPointer } from "kontra";
 import { GameStatus } from "./types";
 import Screen from "./screen";
 import generateMonster, { BaseMonster } from "./monsters";
 import generateLevel, { Level } from "./levels";
+import MovementDetector from "./movementDetector";
 import Hero from "./hero";
 import Lifes from "./lifes";
 
@@ -14,6 +15,7 @@ export default class App {
   private levelGenerator: Iterator<Level, void, void>;
 
   private level: Level;
+  private readonly movementDetector: MovementDetector;
   private hero: Hero;
   private monster: BaseMonster;
   private lifes: Lifes;
@@ -39,6 +41,7 @@ export default class App {
   }
 
   private renderGameObjects() {
+    this.movementDetector.render();
     this.hero.render();
     this.monster.render();
     this.lifes.render();
@@ -46,6 +49,7 @@ export default class App {
 
   private update() {
     if (this.gameStatus === GameStatus.Play) {
+      this.movementDetector.update();
       this.monster.fall(this.hero);
       this.hero.killOnCollide(this.monster);
       this.hero.update();
@@ -57,6 +61,7 @@ export default class App {
     onPointer("down", this.begin.bind(this));
     onKey("space", this.playPauseGame.bind(this));
     onKey("esc", this.stopGame.bind(this));
+    on("heroMoved", this.handleHeroMoved.bind(this));
     on("killed", this.handleHeroKilled.bind(this));
     on("monsterLeft", this.respawnMonster.bind(this));
   }
@@ -85,8 +90,17 @@ export default class App {
     this.levelGenerator = generateLevel();
     this.advanceLevel();
     this.respawnMonster();
+    this.movementDetector = new MovementDetector();
     this.hero = new Hero();
     this.lifes = new Lifes();
+  }
+
+  private handleHeroMoved(direction) {
+    if (direction === 1) {
+      this.hero.moveRight();
+    } else {
+      this.hero.moveLeft();
+    }
   }
 
   private handleHeroKilled() {
