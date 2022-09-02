@@ -2,6 +2,8 @@ import { Sprite, emit } from "kontra";
 import monster from "../assets/monster.svg";
 
 export default class BaseMonster {
+  private readonly width = 30;
+  private readonly height = 30;
   sprite: Sprite;
   verticalSpeed: number;
 
@@ -11,17 +13,19 @@ export default class BaseMonster {
   }
 
   getSprite(): Sprite {
+    const maxWidth = window.gameCanvas.width - this.width;
+    const x = parseInt(Math.random() * maxWidth);
     return Sprite({
-      x: 100,
+      x,
       y: -80,
-      width: 30,
-      height: 30,
+      width: this.width,
+      height: this.height,
       image: this.image(),
     });
   }
 
   image(): HTMLImageElement {
-    const img = new Image(30, 30);
+    const img = new Image(this.width, this.height);
     img.src = monster;
     return img;
   }
