@@ -36,17 +36,21 @@
       canvas {
         display: block;
       }
-      .layers, .layer {
+      .layers {
+        position: relative;
         aspect-ratio: 9/16;
         height: 100%;
       }
-      .layers {
-        position: relative;
+      .layers.full {
+        aspect-ratio: 1;
+        width: 100%;
       }
       .layer {
         position: absolute;
         top: 0;
         left: 0;
+        width: 100%;
+        height: 100%;
         box-sizing: border-box;
         background: #222;
         z-index: 1;
