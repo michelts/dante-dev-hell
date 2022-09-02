@@ -1,4 +1,4 @@
-import { GameLoop, on, onKey } from "kontra";
+import { GameLoop, on, onKey, onPointer, pointerOver } from "kontra";
 import { GameStatus } from "./types";
 import Screen from "./screen";
 import generateMonster, { BaseMonster } from "./monsters";
@@ -54,10 +54,20 @@ export default class App {
   }
 
   private attachEventListeners() {
+    onPointer("down", this.begin.bind(this));
     onKey("space", this.playPauseGame.bind(this));
     onKey("esc", this.stopGame.bind(this));
     on("killed", this.handleHeroKilled.bind(this));
     on("monsterLeft", this.respawnMonster.bind(this));
+  }
+
+  private begin(evt, obj) {
+    if (
+      this.gameStatus !== GameStatus.Play &&
+      this.gameStatus !== GameStatus.Pause
+    ) {
+      this.playPauseGame();
+    }
   }
 
   private playPauseGame() {

@@ -1,4 +1,13 @@
-import { Sprite, SpriteSheet, keyPressed, collides, emit } from "kontra";
+import {
+  Sprite,
+  SpriteSheet,
+  keyPressed,
+  collides,
+  emit,
+  track,
+  pointerOver,
+  pointerPressed,
+} from "kontra";
 import { BaseMonster } from "./monsters";
 import boat from "./assets/boat.svg";
 
@@ -30,6 +39,20 @@ export default class Hero {
       },
     });
 
+    this.leftClickContainer = Sprite({
+      x: 0,
+      y: 0,
+      width: window.gameCanvas.width / 2,
+      height: window.gameCanvas.height,
+    });
+    this.rightClickContainer = Sprite({
+      x: this.leftClickContainer.width,
+      y: 0,
+      width: window.gameCanvas.width / 2,
+      height: window.gameCanvas.height,
+    });
+    track(this.leftClickContainer, this.rightClickContainer);
+
     this.sprite = Sprite({
       x: (window.gameCanvas.width - width) / 2,
       y: window.gameCanvas.height - height - margin,
@@ -48,12 +71,15 @@ export default class Hero {
   }
 
   render(): void {
+    this.leftClickContainer.render();
+    this.rightClickContainer.render();
     this.sprite.render();
   }
 
   update(): void {
     this.allowMove();
     this.sprite.update();
+
     if (
       this.collisionAnimationTimeout != null &&
       this.collisionAnimationTimeout !== 0
@@ -67,10 +93,26 @@ export default class Hero {
   }
 
   allowMove(): void {
+    let direction = 0;
+    if (pointerPressed("left")) {
+      if (pointerOver(this.leftClickContainer)) {
+        direction = -1;
+      } else if (pointerOver(this.rightClickContainer)) {
+        direction = 1;
+      }
+    }
+
     if (keyPressed("arrowleft")) {
-      this.moveLeft();
+      direction = -1;
     }
     if (keyPressed("arrowright")) {
+      direction = 1;
+    }
+
+    if (direction === -1) {
+      this.moveLeft();
+    }
+    if (direction === 1) {
       this.moveRight();
     }
   }

@@ -1,4 +1,4 @@
-import { init, initKeys } from "kontra";
+import { init, initKeys, initPointer } from "kontra";
 import App from "./app";
 
 declare global {
@@ -11,6 +11,7 @@ function initCanvas() {
   const canvas = createCanvas();
   init(canvas);
   initKeys();
+  initPointer();
   return canvas;
 }
 
