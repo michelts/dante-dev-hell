@@ -49,5 +49,9 @@
       ],
       "\\.(svg)$": "<rootDir>/.jest/svgTransform.js"
     }
+  },
+  "dependencies": {
+    "rollup-plugin-scss": "^3.0.0",
+    "sass": "^1.54.8"
   }
 }

@@ -1,6 +1,7 @@
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import esbuild from "rollup-plugin-esbuild";
 import url from "@rollup/plugin-url";
+import scss from "rollup-plugin-scss";
 import analyze from "rollup-plugin-analyzer";
 import { uglify } from "rollup-plugin-uglify";
 import copy from "rollup-plugin-copy";
@@ -20,6 +21,11 @@ const config = {
     nodeResolve(),
     esbuild(),
     url(),
+    scss({
+      output: "dist/styles.css",
+      sourceMap: !isProduction,
+      outputStyle: "compressed",
+    }),
     isProduction &&
       cleaner({
         targets: ["./dist/"],

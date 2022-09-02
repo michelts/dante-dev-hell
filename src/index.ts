@@ -1,5 +1,6 @@
 import { init, initKeys, initPointer } from "kontra";
 import App from "./app";
+import "./style.scss";
 
 declare global {
   interface Window {
