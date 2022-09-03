@@ -2,10 +2,23 @@ import Hero from "../hero";
 import BaseMonster from "./base";
 
 export default class TeleportingMonster extends BaseMonster {
+  private readonly threshold: number;
   private teleported: boolean = false;
 
+  constructor(...args: ConstructorParameters<typeof BaseMonster>) {
+    super(...args);
+    const baseDistance = Math.min(200, window.gameCanvas.height / 2);
+    const baseSpeed = 2;
+    const incrementRate = 0.2;
+    this.threshold =
+      baseDistance * (1 + incrementRate * (this.verticalSpeed - baseSpeed));
+  }
+
   fall(hero: Hero): void {
-    if (this.sprite.y > window.gameCanvas.height / 2 && !this.teleported) {
+    if (
+      window.gameCanvas.height - this.sprite.y < this.threshold &&
+      !this.teleported
+    ) {
       this.teleport(hero);
     }
     super.fall();
