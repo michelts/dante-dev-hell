@@ -46,7 +46,7 @@ canvas {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  background: #222;
+  background: navy;
   z-index: 1;
 }
 .layer:first-child {
@@ -57,4 +57,5 @@ canvas {
   padding: 16px;
   pointer-events: none;
   z-index: 2;
+  background: #222;
 }
