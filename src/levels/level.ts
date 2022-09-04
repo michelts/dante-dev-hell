@@ -1,5 +1,6 @@
 import { on, off, emit } from "kontra";
 import { Language } from "../types";
+import Background from "../background";
 import generateMonster, { BaseMonster } from "../monsters";
 
 export default class Level {
@@ -26,15 +27,18 @@ export default class Level {
     this.language = language;
     this.frequency = frequency;
     this.isAccomplished = false;
+    this.background = new Background(this.language);
     this.createMonsterGenerator();
     this.attachEventListeners();
   }
 
   render(): void {
+    this.background.render();
     this.monsters.forEach((monster: BaseMonster) => monster.render());
   }
 
   update(hero: Hero): void {
+    this.background.update();
     this.monsters.forEach((monster: BaseMonster) => {
       monster.fall(hero);
       hero.killOnCollide(monster);

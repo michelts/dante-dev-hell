@@ -36,9 +36,9 @@ export default class App {
   }
 
   private renderGameObjects() {
+    this.levels.render();
     this.movementDetector.render();
     this.hero.render();
-    this.levels.render();
     this.lifes.render();
   }
 

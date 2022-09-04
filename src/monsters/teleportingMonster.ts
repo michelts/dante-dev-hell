@@ -1,6 +1,6 @@
 import Hero from "../hero";
 import BaseMonster from "./base";
-import monster from '../assets/monster-3.svg';
+import monster from "../assets/monster-3.svg";
 
 export default class TeleportingMonster extends BaseMonster {
   private readonly height = 75;
@@ -9,7 +9,7 @@ export default class TeleportingMonster extends BaseMonster {
 
   constructor(...args: ConstructorParameters<typeof BaseMonster>) {
     super(...args);
-    const baseDistance = Math.min(200, window.gameCanvas.height / 2);
+    const baseDistance = Math.min(300, window.gameCanvas.height / 2);
     const baseSpeed = 2;
     const incrementRate = 0.2;
     this.threshold =
