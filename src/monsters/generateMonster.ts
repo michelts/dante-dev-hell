@@ -8,10 +8,12 @@ const MONSTERS = [FallingMonster, SlidingMonster, MagneticMonster, TeleportingMo
 
 export default function* generateMonster({
   speed,
+  frequency,
 }: {
   speed: number;
+  frequency: number;
 }): Iterator<BaseMonster, void, void> {
   for (const MonsterType of MONSTERS) {
-    yield new MonsterType({ speed });
+    yield new MonsterType({ speed, frequency });
   }
 }

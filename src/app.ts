@@ -1,7 +1,7 @@
 import { GameLoop, on, onKey, onPointer } from "kontra";
 import { GameStatus } from "./types";
 import Screen from "./screen";
-import generateMonster, { BaseMonster } from "./monsters";
+import { BaseMonster } from "./monsters";
 import generateLevel, { Level } from "./levels";
 import MovementDetector from "./movementDetector";
 import Hero from "./hero";
@@ -11,13 +11,12 @@ export default class App {
   private gameStatus: GameStatus = GameStatus.Stop;
   private screen: Screen;
 
-  private monsterGenerator: Iterator<BaseMonster, void, void>;
   private levelGenerator: Iterator<Level, void, void>;
 
   private level: Level;
   private readonly movementDetector: MovementDetector;
   private hero: Hero;
-  private monster: BaseMonster;
+  private readonly monsters: BaseMonster[] = [];
   private lifes: Lifes;
 
   init(): void {
@@ -43,18 +42,21 @@ export default class App {
   private renderGameObjects() {
     this.movementDetector.render();
     this.hero.render();
-    this.monster.render();
+    this.level.renderMonsters();
     this.lifes.render();
   }
 
   private update() {
     if (this.gameStatus === GameStatus.Play) {
-      this.movementDetector.update();
-      this.monster.fall(this.hero);
-      this.hero.killOnCollide(this.monster);
-      this.hero.update();
-      this.lifes.update();
+      this.updateGameObjects();
     }
+  }
+
+  private updateGameObjects() {
+    this.movementDetector.update();
+    this.hero.update();
+    this.level.updateMonsters(this.hero);
+    this.lifes.update();
   }
 
   private attachEventListeners() {
@@ -63,7 +65,8 @@ export default class App {
     onKey("esc", this.stopGame.bind(this));
     on("heroMoved", this.handleHeroMoved.bind(this));
     on("killed", this.handleHeroKilled.bind(this));
-    on("monsterLeft", this.respawnMonster.bind(this));
+    on("callNextMonster", this.spawnMonster.bind(this));
+    on("destroyMonster", this.destroyMonster.bind(this));
   }
 
   private begin(evt, obj) {
@@ -89,7 +92,6 @@ export default class App {
   private initializeObjects() {
     this.levelGenerator = generateLevel();
     this.advanceLevel();
-    this.respawnMonster();
     this.movementDetector = new MovementDetector();
     this.hero = new Hero();
     this.lifes = new Lifes();
@@ -110,11 +112,13 @@ export default class App {
     }
   }
 
-  private respawnMonster() {
-    const { value, done } = this.monsterGenerator.next();
-    if (done === false) {
-      this.monster = value;
-    } else {
+  private spawnMonster() {
+    this.level.spawnMonster();
+  }
+
+  private destroyMonster() {
+    this.level.destroyMonster();
+    if (this.level.isAccomplished === true) {
       this.advanceLevel();
     }
   }
@@ -123,7 +127,6 @@ export default class App {
     const { value, done } = this.levelGenerator.next();
     if (done === false) {
       this.level = value;
-      this.monsterGenerator = generateMonster({ speed: this.level.getSpeed() });
     } else {
       this.completeGame();
     }

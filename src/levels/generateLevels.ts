@@ -1,10 +1,14 @@
 import { Language } from "../types";
 import Level from "./level";
 
+const LEVELS = [
+  { language: Language.Python, speed: 1.5, frequency: 1 },
+  { language: Language.Ruby, speed: 1.5, frequency: 0.5 },
+  { language: Language.Javascript, speed: 2, frequency: 1 },
+];
+
 export default function* generateLevels(): Iterator<Level, void, void> {
-  let speed = 2;
-  for (const language of Object.keys(Language)) {
-    yield new Level({ speed, language });
-    speed += 1;
+  for (const params of LEVELS) {
+    yield new Level(params);
   }
 }

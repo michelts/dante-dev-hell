@@ -6,9 +6,12 @@ export default class BaseMonster {
   private readonly height = 80;
   sprite: Sprite;
   verticalSpeed: number;
+  nextMonsterCalled = false;
+  monsterLeftScreen = false;
 
-  constructor({ speed }: { speed: number }) {
+  constructor({ speed, frequency }: { speed: number, frequency: number }) {
     this.verticalSpeed = speed;
+    this.nextMonsterLimit = window.gameCanvas.height * frequency;
     this.sprite = this.getSprite();
   }
 
@@ -41,8 +44,13 @@ export default class BaseMonster {
   }
 
   restartWhenOutCanvas(): void {
-    if (this.sprite.y > window.gameCanvas.height) {
-      emit("monsterLeft");
+    if (!this.nextMonsterCalled && this.sprite.y > this.nextMonsterLimit) {
+      this.nextMonsterCalled = true;
+      emit("callNextMonster");
+    }
+    if (!this.monsterLeftScreen && this.sprite.y > window.gameCanvas.height) {
+      this.monsterLeftScreen = true;
+      emit("destroyMonster");
     }
   }
 }
