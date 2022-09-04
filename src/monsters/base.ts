@@ -1,9 +1,9 @@
 import { Sprite, emit } from "kontra";
-import monster from "../assets/monster.svg";
+import monster from "../assets/monster-1.svg";
 
 export default class BaseMonster {
-  private readonly width = 30;
-  private readonly height = 30;
+  private readonly width = 100;
+  private readonly height = 80;
   sprite: Sprite;
   verticalSpeed: number;
 

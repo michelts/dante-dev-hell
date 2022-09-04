@@ -1,7 +1,9 @@
 import Hero from "../hero";
 import BaseMonster from "./base";
+import monster from '../assets/monster-3.svg';
 
 export default class TeleportingMonster extends BaseMonster {
+  private readonly height = 75;
   private readonly threshold: number;
   private teleported: boolean = false;
 
@@ -22,6 +24,12 @@ export default class TeleportingMonster extends BaseMonster {
       this.teleport(hero);
     }
     super.fall();
+  }
+
+  image(): HTMLImageElement {
+    const img = new Image(this.width, this.height);
+    img.src = monster;
+    return img;
   }
 
   private teleport(hero: Hero) {

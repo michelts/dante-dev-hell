@@ -1,11 +1,19 @@
 import BaseMonster from "./base";
+import monster from "../assets/monster-2.svg";
 
 export default class SlidingMonster extends BaseMonster {
+  private readonly height = 65;
   reverseDirection: boolean;
 
   constructor(...args: ConstructorParameters<typeof BaseMonster>) {
     super(...args);
     this.reverseDirection = false;
+  }
+
+  image(): HTMLImageElement {
+    const img = new Image(this.width, this.height);
+    img.src = monster;
+    return img;
   }
 
   render(): void {

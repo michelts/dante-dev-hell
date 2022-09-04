@@ -1,0 +1,26 @@
+<svg width="100" height="65" version="1.1" viewBox="0 0 26 17" xmlns="http://www.w3.org/2000/svg">
+<g transform="matrix(-.41 -.32 -.31 .42 57 35)">
+<path d="m96 15c-5.6-3.4-10-4.4-13-1.4-4-3.1-7.3-1.8-11-1.1-0.77-13 6.8-16 14-19 0.92 8.2 4.8 15 9.7 22z" fill="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width=".96"/>
+<path d="m72 12c-0.77-13 6.8-16 14-19 0.92 8.2 4.8 15 9.7 22" fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width=".96"/>
+<path d="m86-7.1c-3.1 6.5-6.2 13-3.3 20" fill="none" stroke="#333" stroke-width=".96"/>
+</g>
+<g transform="matrix(.41 -.32 .31 .42 -30 35)">
+<path d="m96 15c-5.6-3.4-10-4.4-13-1.4-4-3.1-7.3-1.8-11-1.1-0.77-13 6.8-16 14-19 0.92 8.2 4.8 15 9.7 22z" fill="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width=".96"/>
+<path d="m72 12c-0.77-13 6.8-16 14-19 0.92 8.2 4.8 15 9.7 22" fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width=".96"/>
+<path d="m86-7.1c-3.1 6.5-6.2 13-3.3 20" fill="none" stroke="#333" stroke-width=".96"/>
+</g>
+<g stroke="#333" stroke-linecap="round">
+<path d="m20 6.3c0.2-3.3-3-6-6.5-6s-6.4 2.8-6.2 6c0.32 6.9 4.1 9.6 6.7 9.8 3.1 0.26 5.6-2.8 6-9.8z" fill="#808080" stroke-linejoin="round" stroke-width=".5"/>
+<path d="m14 16c-6.4-0.24-4.7-2.9-4-3.5 1.4-1.1 6.9-1.1 6.9 0.77" fill="#808080" stroke-width=".5"/>
+<path d="m12 12-1.9-0.059 0.86 1.7z" fill="#fff" stroke-linejoin="round" stroke-width=".5"/>
+<path d="m16 12-1.9-0.066 0.9 1.7z" fill="#fff" stroke-linejoin="round" stroke-width=".5"/>
+</g>
+<path d="m13 16c5.7-1.4 8.8-12 0.52-16 4.4 0.77 6.9 3 6.5 6-1 6.7-2.2 9.7-7 9.7z" fill-opacity=".23"/>
+<g transform="matrix(.98 0 0 1 -84 -65)">
+<ellipse cx="97" cy="71" rx="2.6" ry="1.9" fill="#fff" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width=".5"/>
+<ellipse cx="102" cy="71" rx="2.6" ry="1.9" fill="#fff" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width=".5"/>
+<ellipse cx="97" cy="72" rx=".94" ry=".62" fill="#333"/>
+<ellipse cx="102" cy="72" rx=".94" ry=".62" fill="#333"/>
+</g>
+<path d="m9.5 3.7c2.9 1.7 4.8 1.1 6.6 0" fill="none" stroke="#333" stroke-linecap="round"/>
+</svg>
