@@ -1,3 +1,4 @@
+import { on, off, emit } from "kontra";
 import { Language } from "../types";
 import generateMonster, { BaseMonster } from "../monsters";
 
@@ -7,6 +8,7 @@ export default class Level {
   private readonly frequency: number;
   private readonly monsterGenerator: Iterator<BaseMonster, void, void>;
   private readonly monsters: BaseMonster[];
+  private isAccomplished: boolean;
 
   constructor({
     speed,
@@ -17,30 +19,52 @@ export default class Level {
     language: Language;
     frequency: number;
   }) {
+    this.bindedSpawnMonster = this.spawnMonster.bind(this);
+    this.bindedDestroyMonster = this.destroyMonster.bind(this);
+
     this.speed = speed;
     this.language = language;
     this.frequency = frequency;
-    this.monsterGenerator = generateMonster({
-      speed: this.speed,
-      frequency: this.frequency,
-    });
-    this.monsters = [];
-    this.spawnMonster();
     this.isAccomplished = false;
+    this.createMonsterGenerator();
+    this.attachEventListeners();
   }
 
-  renderMonsters(): void {
+  render(): void {
     this.monsters.forEach((monster: BaseMonster) => monster.render());
   }
 
-  updateMonsters(hero: Hero): void {
+  update(hero: Hero): void {
     this.monsters.forEach((monster: BaseMonster) => {
       monster.fall(hero);
       hero.killOnCollide(monster);
     });
   }
 
-  spawnMonster(): void {
+  destroy(): void {
+    this.removeEventListeners();
+  }
+
+  private attachEventListeners() {
+    on("callNextMonster", this.bindedSpawnMonster);
+    on("destroyMonster", this.bindedDestroyMonster);
+  }
+
+  private removeEventListeners() {
+    off("callNextMonster", this.bindedSpawnMonster);
+    off("destroyMonster", this.bindedDestroyMonster);
+  }
+
+  private createMonsterGenerator() {
+    this.monsterGenerator = generateMonster({
+      speed: this.speed,
+      frequency: this.frequency,
+    });
+    this.monsters = [];
+    this.spawnMonster();
+  }
+
+  private spawnMonster(): void {
     const { value, done } = this.monsterGenerator.next();
     if (done === false) {
       this.monsters.unshift(value);
@@ -49,7 +73,10 @@ export default class Level {
     }
   }
 
-  destroyMonster(): void {
+  private destroyMonster() {
     this.monsters.pop();
+    if (this.isAccomplished) {
+      emit("levelAccomplished");
+    }
   }
 }

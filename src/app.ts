@@ -1,8 +1,7 @@
 import { GameLoop, on, onKey, onPointer } from "kontra";
 import { GameStatus } from "./types";
 import Screen from "./screen";
-import { BaseMonster } from "./monsters";
-import generateLevel, { Level } from "./levels";
+import Levels from "./levels";
 import MovementDetector from "./movementDetector";
 import Hero from "./hero";
 import Lifes from "./lifes";
@@ -11,12 +10,9 @@ export default class App {
   private gameStatus: GameStatus = GameStatus.Stop;
   private screen: Screen;
 
-  private levelGenerator: Iterator<Level, void, void>;
-
-  private level: Level;
   private readonly movementDetector: MovementDetector;
   private hero: Hero;
-  private readonly monsters: BaseMonster[] = [];
+  private levels: Levels;
   private lifes: Lifes;
 
   init(): void {
@@ -42,7 +38,7 @@ export default class App {
   private renderGameObjects() {
     this.movementDetector.render();
     this.hero.render();
-    this.level.renderMonsters();
+    this.levels.render();
     this.lifes.render();
   }
 
@@ -55,7 +51,7 @@ export default class App {
   private updateGameObjects() {
     this.movementDetector.update();
     this.hero.update();
-    this.level.updateMonsters(this.hero);
+    this.levels.update(this.hero);
     this.lifes.update();
   }
 
@@ -63,10 +59,8 @@ export default class App {
     onPointer("down", this.begin.bind(this));
     onKey("space", this.playPauseGame.bind(this));
     onKey("esc", this.stopGame.bind(this));
-    on("heroMoved", this.handleHeroMoved.bind(this));
-    on("killed", this.handleHeroKilled.bind(this));
-    on("callNextMonster", this.spawnMonster.bind(this));
-    on("destroyMonster", this.destroyMonster.bind(this));
+    on("gameOver", this.gameOver.bind(this));
+    on("gameComplete", this.completeGame.bind(this));
   }
 
   private begin(evt, obj) {
@@ -83,53 +77,28 @@ export default class App {
       this.gameStatus = GameStatus.Pause;
     } else {
       if (this.gameStatus !== GameStatus.Pause) {
-        this.initializeObjects();
+        this.reinitializeObjects();
       }
       this.gameStatus = GameStatus.Play;
     }
   }
 
-  private initializeObjects() {
-    this.levelGenerator = generateLevel();
-    this.advanceLevel();
+  private reinitializeObjects() {
+    console.log('Reinitialize');
+    if (this.levels) {
+      this.levels.destroy();
+    }
+    if (this.hero) {
+      this.hero.destroy();
+    }
+    if (this.lifes) {
+      this.lifes.destroy();
+    }
+
     this.movementDetector = new MovementDetector();
+    this.levels = new Levels();
     this.hero = new Hero();
     this.lifes = new Lifes();
-  }
-
-  private handleHeroMoved(direction) {
-    if (direction === 1) {
-      this.hero.moveRight();
-    } else {
-      this.hero.moveLeft();
-    }
-  }
-
-  private handleHeroKilled() {
-    this.lifes.discountLife();
-    if (!this.lifes.isLive()) {
-      this.gameOver();
-    }
-  }
-
-  private spawnMonster() {
-    this.level.spawnMonster();
-  }
-
-  private destroyMonster() {
-    this.level.destroyMonster();
-    if (this.level.isAccomplished === true) {
-      this.advanceLevel();
-    }
-  }
-
-  private advanceLevel() {
-    const { value, done } = this.levelGenerator.next();
-    if (done === false) {
-      this.level = value;
-    } else {
-      this.completeGame();
-    }
   }
 
   private stopGame() {
