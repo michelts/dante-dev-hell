@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="16mm"
+   height="16mm"
+   viewBox="0 0 16 16"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="heart.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showguides="true"
+     inkscape:zoom="2"
+     inkscape:cx="6.5"
+     inkscape:cy="-0.75"
+     inkscape:window-width="1600"
+     inkscape:window-height="851"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="rect1770"
+       style="fill:#ff0000;stroke-width:0.484578;stroke-linecap:round;stroke-linejoin:round"
+       d="M 2.57,0.10 C -0.12,0.65 -0.16,3.80 0.118,5.86 0.66,10.10 4.04,13.51 8.00,16 11.97,13.501 15.34,10.10 15.89,5.86 16.16,3.79 16.12,0.65 13.43,0.10 11.06,-0.38 9.37,0.96 8.00,3.32 6.38,0.89 5.00,-0.38 2.57,0.10 Z"
+       sodipodi:nodetypes="cscsscc" />
+  </g>
+</svg>
