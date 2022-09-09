@@ -8,5 +8,5 @@
     "strictNullChecks": true,
     "noImplicitAny": true
   },
-  "include": ["src/**/*", "assets/**/*", "typedefs/*"]
+  "include": ["src/**/*", "assets/**/*", "typedefs/*", "__mocks__/*"]
 }

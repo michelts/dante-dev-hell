@@ -69,7 +69,7 @@ it("should not cross the left border of the screen if the hero is thinner", () =
   expect(monster.sprite.x).toEqual(0);
 });
 
-xit("should keep the x position if aligned with the hero position", () => {
+it.skip("should keep the x position if aligned with the hero position", () => {
   const speed = 2;
   const frequency = 1;
   const monster = new TeleportingMonster({ speed, frequency });

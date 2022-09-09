@@ -16,6 +16,11 @@ module.exports = {
         "@typescript-eslint/explicit-module-boundary-types": 2,
       },
     },
+    {
+      files: ["__mocks__/**/*.js", "**/*.test.ts"],
+      plugins: ["jest"],
+      extends: ["plugin:jest/recommended"],
+    },
   ],
   ignorePatterns: ["dist/*"],
   rules: {},
