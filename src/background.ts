@@ -26,7 +26,6 @@ export default class Background {
   shadow: Sprite;
 
   constructor(language: Language) {
-    console.log(language, COLORS[language]);
     this.background = Sprite({
       x: 0,
       y: 0,

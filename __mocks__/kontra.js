@@ -18,6 +18,8 @@ export const SpriteSheet = jest
 
 export const on = jest.fn();
 
+export const emit = jest.fn();
+
 export default jest.fn().mockImplementation(() => ({
   Sprite,
   SpriteSheet,
