@@ -1,5 +1,5 @@
 import { on, off, emit } from "kontra";
-import { Language } from "../types";
+import { Language, LevelParams } from "../types";
 import Background from "../background";
 import generateMonster, { BaseMonster } from "../monsters";
 
@@ -11,15 +11,7 @@ export default class Level {
   private readonly monsters: BaseMonster[];
   private isAccomplished: boolean;
 
-  constructor({
-    speed,
-    language,
-    frequency,
-  }: {
-    speed: number;
-    language: Language;
-    frequency: number;
-  }) {
+  constructor({ speed, language, frequency }: LevelParams) {
     this.bindedSpawnMonster = this.spawnMonster.bind(this);
     this.bindedDestroyMonster = this.destroyMonster.bind(this);
 

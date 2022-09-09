@@ -15,3 +15,9 @@ export enum Language {
   HolyC,
   Assembly,
 }
+
+export interface LevelParams {
+  language: Language;
+  speed: number;
+  frequency: number;
+}
