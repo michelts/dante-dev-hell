@@ -14,6 +14,13 @@ module.exports = {
       rules: {
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-module-boundary-types": 2,
+        "jest/expect-expect": [
+          "error",
+          {
+            assertFunctionNames: ["expect", "assert*"],
+            additionalTestBlockFunctions: [],
+          },
+        ],
       },
     },
     {
