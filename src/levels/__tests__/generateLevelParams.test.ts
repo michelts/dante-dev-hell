@@ -11,8 +11,8 @@ it("should 3 levels from each language tier", () => {
       language: Language.Python,
       frequency: 1,
       speed: 2,
-      monstersCount: 6,
-      monsterLevelWeights: [100, 0],
+      monsterCount: 6,
+      monsterLevelDistribution: [100, 0],
     },
   });
   expect(generator.next()).toEqual({
@@ -21,8 +21,8 @@ it("should 3 levels from each language tier", () => {
       language: Language.Javascript,
       frequency: 0.75,
       speed: 2,
-      monstersCount: 6,
-      monsterLevelWeights: [80, 20],
+      monsterCount: 6,
+      monsterLevelDistribution: [80, 20],
     },
   });
   expect(generator.next()).toEqual({
@@ -31,8 +31,8 @@ it("should 3 levels from each language tier", () => {
       language: Language.Ruby,
       frequency: 0.5,
       speed: 2,
-      monstersCount: 6,
-      monsterLevelWeights: [60, 40],
+      monsterCount: 6,
+      monsterLevelDistribution: [60, 40],
     },
   });
 
@@ -43,8 +43,8 @@ it("should 3 levels from each language tier", () => {
       language: Language.Java,
       frequency: 1,
       speed: 2.5,
-      monstersCount: 8,
-      monsterLevelWeights: [80, 20],
+      monsterCount: 8,
+      monsterLevelDistribution: [80, 20],
     },
   });
   expect(generator.next()).toEqual({
@@ -53,8 +53,8 @@ it("should 3 levels from each language tier", () => {
       language: Language.Go,
       frequency: 0.75,
       speed: 2.5,
-      monstersCount: 8,
-      monsterLevelWeights: [60, 40],
+      monsterCount: 8,
+      monsterLevelDistribution: [60, 40],
     },
   });
   expect(generator.next()).toEqual({
@@ -63,8 +63,8 @@ it("should 3 levels from each language tier", () => {
       language: Language.Typescript,
       frequency: 0.5,
       speed: 2.5,
-      monstersCount: 8,
-      monsterLevelWeights: [40, 60],
+      monsterCount: 8,
+      monsterLevelDistribution: [40, 60],
     },
   });
 
@@ -75,8 +75,8 @@ it("should 3 levels from each language tier", () => {
       language: Language.C,
       frequency: 1,
       speed: 3,
-      monstersCount: 10,
-      monsterLevelWeights: [60, 40],
+      monsterCount: 10,
+      monsterLevelDistribution: [60, 40],
     },
   });
   expect(generator.next()).toEqual({
@@ -85,8 +85,8 @@ it("should 3 levels from each language tier", () => {
       language: Language.Malbolge,
       frequency: 0.75,
       speed: 3,
-      monstersCount: 10,
-      monsterLevelWeights: [40, 60],
+      monsterCount: 10,
+      monsterLevelDistribution: [40, 60],
     },
   });
   expect(generator.next()).toEqual({
@@ -95,8 +95,8 @@ it("should 3 levels from each language tier", () => {
       language: Language.HolyC,
       frequency: 0.5,
       speed: 3,
-      monstersCount: 10,
-      monsterLevelWeights: [20, 80],
+      monsterCount: 10,
+      monsterLevelDistribution: [20, 80],
     },
   });
 

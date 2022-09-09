@@ -1,27 +1,36 @@
 import { on, off, emit } from "kontra";
-import { Language, LevelParams } from "../types";
+import * as types from "../types";
 import Background from "../background";
-import Hero from "../hero";
-import generateMonster, { BaseMonster } from "../monsters";
+import generateMonster from "../monsters";
 
 export default class Level {
   private readonly bindedSpawnMonster;
   private readonly bindedDestroyMonster;
   private readonly speed: number;
-  private readonly language: Language;
+  private readonly language: types.Language;
   private readonly frequency: number;
-  private monsterGenerator: Iterator<BaseMonster, void, void>;
-  private monsters: BaseMonster[];
+  private readonly monsterCount: number;
+  private readonly monsterLevelDistribution: [number, number];
+  private monsterTypeGenerator: Iterator<types.MonsterConstructor, void, void>;
+  private monsters: types.Monster[];
   private readonly background: Background;
   private isAccomplished: boolean;
 
-  constructor({ speed, language, frequency }: LevelParams) {
+  constructor({
+    language,
+    speed,
+    frequency,
+    monsterCount,
+    monsterLevelDistribution,
+  }: types.LevelParams) {
     this.bindedSpawnMonster = this.spawnMonster.bind(this);
     this.bindedDestroyMonster = this.destroyMonster.bind(this);
 
-    this.speed = speed;
     this.language = language;
+    this.speed = speed;
     this.frequency = frequency;
+    this.monsterCount = monsterCount;
+    this.monsterLevelDistribution = monsterLevelDistribution;
     this.isAccomplished = false;
     this.background = new Background(this.language);
     this.initializeMonsterGenerator();
@@ -30,12 +39,12 @@ export default class Level {
 
   render(): void {
     this.background.render();
-    this.monsters.forEach((monster: BaseMonster) => monster.render());
+    this.monsters.forEach((monster: types.Monster) => monster.render());
   }
 
-  update(hero: Hero): void {
+  update(hero: types.Hero): void {
     this.background.update();
-    this.monsters.forEach((monster: BaseMonster) => {
+    this.monsters.forEach((monster: types.Monster) => {
       monster.fall(hero);
       hero.killOnCollide(monster);
     });
@@ -56,18 +65,23 @@ export default class Level {
   }
 
   private initializeMonsterGenerator() {
-    this.monsterGenerator = generateMonster({
-      speed: this.speed,
-      frequency: this.frequency,
+    this.monsterTypeGenerator = generateMonster<types.MonsterConstructor>({
+      count: this.monsterCount,
+      levelDistribution: this.monsterLevelDistribution,
     });
     this.monsters = [];
     this.spawnMonster();
   }
 
   private spawnMonster(): void {
-    const { value, done } = this.monsterGenerator.next();
+    const { value: MonsterType, done } = this.monsterTypeGenerator.next();
     if (done === false) {
-      this.monsters.unshift(value);
+      this.monsters.unshift(
+        new MonsterType({
+          speed: this.speed,
+          frequency: this.frequency,
+        })
+      );
     } else {
       this.isAccomplished = true;
     }

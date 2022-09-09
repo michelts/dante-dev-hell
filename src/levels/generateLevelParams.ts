@@ -36,7 +36,7 @@ export default function* generateLevelsParams(
   const frequencyDecrement = 0.25;
 
   const baseMonstersCount = 6;
-  const monstersCountIncrement = 2;
+  const monsterCountIncrement = 2;
 
   const baseMonsterEasyPct = 100;
   const monsterLevelWeightDecrement = 20;
@@ -52,8 +52,8 @@ export default function* generateLevelsParams(
         language: languages[levelIndex] as Language,
         speed: baseSpeed + speedIncrement * tierIndex,
         frequency: baseFrequency - frequencyDecrement * levelIndex,
-        monstersCount: baseMonstersCount + monstersCountIncrement * tierIndex,
-        monsterLevelWeights: [monsterEasyPct, 100 - monsterEasyPct],
+        monsterCount: baseMonstersCount + monsterCountIncrement * tierIndex,
+        monsterLevelDistribution: [monsterEasyPct, 100 - monsterEasyPct],
       };
     }
   }

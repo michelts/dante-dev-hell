@@ -75,7 +75,7 @@ it("should keep the x position if aligned with the hero position", () => {
   const speed = 2;
   const frequency = 1;
   const monster = new TeleportingMonster({ speed, frequency });
-  const { x, y, width } = monster.sprite;
+  const { x, width } = monster.sprite;
   const center = x + width / 2;
   const hero = { sprite: { width: 30, x: center - 15 } } as Hero;
   while (monster.sprite.y < window.gameCanvas.height) {

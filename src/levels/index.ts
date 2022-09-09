@@ -1,12 +1,16 @@
 import { emit, on, off } from "kontra";
-import { LevelParams } from "../types";
-import Hero from "../hero";
+import * as types from "../types";
 import generateLevelParams from "./generateLevelParams";
 import Level from "./level";
 
 export default class Levels {
   private readonly bindedFinishLevel;
-  private readonly levelParamsGenerator: Iterator<LevelParams, void, void>;
+  private readonly levelParamsGenerator: Iterator<
+    types.LevelParams,
+    void,
+    void
+  >;
+
   private level: Level;
 
   constructor() {
@@ -20,7 +24,7 @@ export default class Levels {
     this.level.render();
   }
 
-  update(hero: Hero): void {
+  update(hero: types.Hero): void {
     this.level.update(hero);
   }
 

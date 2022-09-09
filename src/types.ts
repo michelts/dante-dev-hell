@@ -1,3 +1,5 @@
+import { Sprite } from "kontra";
+
 export enum GameStatus {
   Play,
   Pause,
@@ -32,6 +34,27 @@ export interface LevelParams {
   language: Language;
   speed: number;
   frequency: number;
-  monstersCount: number;
-  monsterLevelWeights: [number, number];
+  monsterCount: number;
+  monsterLevelDistribution: [number, number];
+}
+
+export interface Hero {
+  killOnCollide: (monster: Monster) => void;
+  render: () => void;
+  update: () => void;
+  destroy: () => void;
+}
+
+export type MonsterConstructor = new ({
+  speed,
+  frequency,
+}: {
+  speed: number;
+  frequency: number;
+}) => Monster;
+
+export interface Monster {
+  render: () => void;
+  fall: (hero: Hero) => void;
+  sprite: Sprite;
 }

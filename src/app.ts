@@ -1,5 +1,5 @@
 import { GameLoop, on, onKey, onPointer } from "kontra";
-import { GameStatus } from "./types";
+import * as types from "./types";
 import Screen from "./screen";
 import Levels from "./levels";
 import MovementDetector from "./movementDetector";
@@ -7,11 +7,11 @@ import Hero from "./hero";
 import Lifes from "./lifes";
 
 export default class App {
-  private gameStatus: GameStatus = GameStatus.Stop;
+  private gameStatus: types.GameStatus = types.GameStatus.Stop;
   private screen: Screen;
 
   private movementDetector: MovementDetector;
-  private hero: Hero;
+  private hero: types.Hero;
   private levels: Levels;
   private lifes: Lifes;
 
@@ -28,8 +28,8 @@ export default class App {
   private render() {
     this.screen.render(this.gameStatus);
     if (
-      this.gameStatus === GameStatus.Play ||
-      this.gameStatus === GameStatus.Pause
+      this.gameStatus === types.GameStatus.Play ||
+      this.gameStatus === types.GameStatus.Pause
     ) {
       this.renderGameObjects();
     }
@@ -43,7 +43,7 @@ export default class App {
   }
 
   private update() {
-    if (this.gameStatus === GameStatus.Play) {
+    if (this.gameStatus === types.GameStatus.Play) {
       this.updateGameObjects();
     }
   }
@@ -65,21 +65,21 @@ export default class App {
 
   private begin() {
     if (
-      this.gameStatus !== GameStatus.Play &&
-      this.gameStatus !== GameStatus.Pause
+      this.gameStatus !== types.GameStatus.Play &&
+      this.gameStatus !== types.GameStatus.Pause
     ) {
       this.playPauseGame();
     }
   }
 
   private playPauseGame() {
-    if (this.gameStatus === GameStatus.Play) {
-      this.gameStatus = GameStatus.Pause;
+    if (this.gameStatus === types.GameStatus.Play) {
+      this.gameStatus = types.GameStatus.Pause;
     } else {
-      if (this.gameStatus !== GameStatus.Pause) {
+      if (this.gameStatus !== types.GameStatus.Pause) {
         this.reinitializeObjects();
       }
-      this.gameStatus = GameStatus.Play;
+      this.gameStatus = types.GameStatus.Play;
     }
   }
 
@@ -101,14 +101,14 @@ export default class App {
   }
 
   private stopGame() {
-    this.gameStatus = GameStatus.Stop;
+    this.gameStatus = types.GameStatus.Stop;
   }
 
   private gameOver() {
-    this.gameStatus = GameStatus.GameOver;
+    this.gameStatus = types.GameStatus.GameOver;
   }
 
   private completeGame() {
-    this.gameStatus = GameStatus.Complete;
+    this.gameStatus = types.GameStatus.Complete;
   }
 }

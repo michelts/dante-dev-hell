@@ -1,15 +1,16 @@
 import { Sprite, emit } from "kontra";
+import { Monster } from "../types";
 import Hero from "../hero";
 import monster from "../assets/monster-1.svg";
 
-export default class BaseMonster {
+export default class BaseMonster implements Monster {
   readonly width: number = 100;
   readonly height: number = 80;
   sprite: Sprite;
-  verticalSpeed: number;
-  limitToCallNextMonster: number;
-  nextMonsterCalled = false;
-  monsterLeftScreen = false;
+  protected verticalSpeed: number;
+  private readonly limitToCallNextMonster: number;
+  private nextMonsterCalled = false;
+  private monsterLeftScreen = false;
 
   constructor({ speed, frequency }: { speed: number; frequency: number }) {
     this.verticalSpeed = speed;

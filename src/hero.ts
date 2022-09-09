@@ -1,8 +1,8 @@
 import { Sprite, SpriteSheet, collides, emit, on, off } from "kontra";
-import { BaseMonster } from "./monsters";
+import * as types from "./types";
 import boat from "./assets/boat.svg";
 
-export default class Hero {
+export default class Hero implements types.Hero {
   private readonly bindedHandleHeroMoved;
   sprite: Sprite;
   spriteSheet: SpriteSheet;
@@ -83,7 +83,7 @@ export default class Hero {
     }
   }
 
-  killOnCollide(monster: BaseMonster): void {
+  killOnCollide(monster: types.Monster): void {
     if (collides(this.sprite, monster.sprite)) {
       if (!this.isColliding) {
         this.isColliding = true;
