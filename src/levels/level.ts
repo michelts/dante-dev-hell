@@ -20,7 +20,7 @@ export default class Level {
     this.frequency = frequency;
     this.isAccomplished = false;
     this.background = new Background(this.language);
-    this.createMonsterGenerator();
+    this.initializeMonsterGenerator();
     this.attachEventListeners();
   }
 
@@ -51,7 +51,7 @@ export default class Level {
     off("destroyMonster", this.bindedDestroyMonster);
   }
 
-  private createMonsterGenerator() {
+  private initializeMonsterGenerator() {
     this.monsterGenerator = generateMonster({
       speed: this.speed,
       frequency: this.frequency,
