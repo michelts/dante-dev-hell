@@ -17,13 +17,13 @@ function initCanvas() {
 }
 
 function createCanvas() {
-  const container = document.getElementById("game");
+  const container = document.getElementById("game") as HTMLElement;
   if (isPortrait()) {
-    container.parentNode.classList.add("full");
+    (container.parentNode as HTMLElement).classList.add("full");
   }
   const canvas = document.createElement("canvas");
-  canvas.setAttribute("width", container.offsetWidth);
-  canvas.setAttribute("height", container.offsetHeight);
+  canvas.setAttribute("width", String(container.offsetWidth));
+  canvas.setAttribute("height", String(container.offsetHeight));
   container.appendChild(canvas);
   return canvas;
 }

@@ -1,9 +1,8 @@
 import { Language } from "../../types";
-import { generateLevelsParams } from "../generateLevels";
+import generateLevelParams from "../generateLevelParams";
 
 it("should 3 levels from each language tier", () => {
-  const fakeShuffle = (inputArray) => inputArray;
-  const generator = generateLevelsParams(fakeShuffle);
+  const generator = generateLevelParams(fakeShuffle);
 
   // tier 1 languages
   expect(generator.next()).toEqual({
@@ -107,3 +106,7 @@ it("should 3 levels from each language tier", () => {
     value: undefined,
   });
 });
+
+function fakeShuffle(inputArray: unknown[]) {
+  return inputArray;
+}

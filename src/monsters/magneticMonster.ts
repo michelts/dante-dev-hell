@@ -3,8 +3,8 @@ import BaseMonster from "./base";
 import monster from "../assets/monster-4.svg";
 
 export default class MagneticMonster extends BaseMonster {
-  private readonly width = 90;
-  private readonly height = 85;
+  readonly width: number = 90;
+  readonly height: number = 85;
   slideSpeed: number;
 
   constructor(...args: ConstructorParameters<typeof BaseMonster>) {
@@ -28,6 +28,6 @@ export default class MagneticMonster extends BaseMonster {
       movement = -1 * this.slideSpeed;
     }
     this.sprite.x += movement;
-    super.fall();
+    super.fall(hero);
   }
 }

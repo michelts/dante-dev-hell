@@ -1,15 +1,17 @@
 import { emit, on, off } from "kontra";
+import { LevelParams } from "../types";
 import Hero from "../hero";
-import generateLevels from "./generateLevels";
+import generateLevelParams from "./generateLevelParams";
 import Level from "./level";
 
 export default class Levels {
-  private readonly levelGenerator: Iterator<Level, void, void>;
+  private readonly bindedFinishLevel;
+  private readonly levelParamsGenerator: Iterator<LevelParams, void, void>;
   private level: Level;
 
   constructor() {
     this.bindedFinishLevel = this.finishLevel.bind(this);
-    this.levelGenerator = generateLevels();
+    this.levelParamsGenerator = generateLevelParams();
     this.addEventListeners();
     this.advanceLevel();
   }
@@ -41,9 +43,9 @@ export default class Levels {
   }
 
   private advanceLevel() {
-    const { value, done } = this.levelGenerator.next();
+    const { value: params, done } = this.levelParamsGenerator.next();
     if (done === false) {
-      this.level = value;
+      this.level = new Level(params);
     } else {
       emit("gameComplete");
     }

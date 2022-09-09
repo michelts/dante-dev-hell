@@ -3,18 +3,42 @@ import { Language } from "./types";
 
 const COLORS = {
   [Language.Python]: "green",
-  [Language.Ruby]: "red",
   [Language.Javascript]: "blue",
+  [Language.Ruby]: "red",
+  [Language.PHP]: "green",
+  [Language.Pascal]: "red",
+  [Language.Julia]: "rgb(50, 50, 50)",
+  [Language.Java]: "rgb(50, 50, 50)",
+  [Language.Go]: "rgb(50, 50, 50)",
+  [Language.Typescript]: "rgb(50, 50, 50)",
+  [Language.Dart]: "rgb(50, 50, 50)",
+  [Language.Kotlin]: "rgb(50, 50, 50)",
+  [Language.Swift]: "rgb(50, 50, 50)",
+  [Language.C]: "rgb(50, 50, 50)",
+  [Language.Malbolge]: "rgb(50, 50, 50)",
+  [Language.HolyC]: "rgb(50, 50, 50)",
+  [Language.Assembly]: "rgb(50, 50, 50)",
+  [Language.COBOL]: "rgb(50, 50, 50)",
 };
 
 export default class Background {
+  background: Sprite;
+  shadow: Sprite;
+
   constructor(language: Language) {
-    this.sprite = Sprite({
+    console.log(language, COLORS[language]);
+    this.background = Sprite({
+      x: 0,
+      y: 0,
+      width: window.gameCanvas.width,
+      height: window.gameCanvas.height,
+      color: COLORS[language],
+    });
+    this.shadow = Sprite({
       x: 0,
       y: -1 * window.gameCanvas.height,
       width: window.gameCanvas.width,
       height: window.gameCanvas.height * 2,
-      color: COLORS[language],
       render: function () {
         renderShadow(this.context);
       },
@@ -23,18 +47,19 @@ export default class Background {
   }
 
   render(): void {
-    this.sprite.render();
+    this.background.render();
+    this.shadow.render();
   }
 
   update(): void {
-    this.sprite.update();
-    if (this.sprite.y >= 0) {
-      this.sprite.y = -1 * window.gameCanvas.height;
+    this.shadow.update();
+    if (this.shadow.y >= 0) {
+      this.shadow.y = -1 * window.gameCanvas.height;
     }
   }
 }
 
-function renderShadow(ctx) {
+function renderShadow(ctx: CanvasRenderingContext2D) {
   const width = 80;
   const height = 300;
   const xScale = window.gameCanvas.width / width;

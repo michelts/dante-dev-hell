@@ -3,6 +3,7 @@ import { BaseMonster } from "./monsters";
 import boat from "./assets/boat.svg";
 
 export default class Hero {
+  private readonly bindedHandleHeroMoved;
   sprite: Sprite;
   spriteSheet: SpriteSheet;
   speed = 3;
@@ -94,7 +95,7 @@ export default class Hero {
     }
   }
 
-  private handleHeroMoved(direction) {
+  private handleHeroMoved(direction: number) {
     if (direction === 1) {
       this.moveRight();
     } else {

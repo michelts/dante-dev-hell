@@ -1,14 +1,18 @@
 import { on, off, emit } from "kontra";
 import { Language, LevelParams } from "../types";
 import Background from "../background";
+import Hero from "../hero";
 import generateMonster, { BaseMonster } from "../monsters";
 
 export default class Level {
+  private readonly bindedSpawnMonster;
+  private readonly bindedDestroyMonster;
   private readonly speed: number;
   private readonly language: Language;
   private readonly frequency: number;
-  private readonly monsterGenerator: Iterator<BaseMonster, void, void>;
-  private readonly monsters: BaseMonster[];
+  private monsterGenerator: Iterator<BaseMonster, void, void>;
+  private monsters: BaseMonster[];
+  private readonly background: Background;
   private isAccomplished: boolean;
 
   constructor({ speed, language, frequency }: LevelParams) {

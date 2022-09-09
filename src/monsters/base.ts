@@ -1,23 +1,25 @@
 import { Sprite, emit } from "kontra";
+import Hero from "../hero";
 import monster from "../assets/monster-1.svg";
 
 export default class BaseMonster {
-  private readonly width = 100;
-  private readonly height = 80;
+  readonly width: number = 100;
+  readonly height: number = 80;
   sprite: Sprite;
   verticalSpeed: number;
+  limitToCallNextMonster: number;
   nextMonsterCalled = false;
   monsterLeftScreen = false;
 
-  constructor({ speed, frequency }: { speed: number, frequency: number }) {
+  constructor({ speed, frequency }: { speed: number; frequency: number }) {
     this.verticalSpeed = speed;
-    this.nextMonsterLimit = window.gameCanvas.height * frequency;
+    this.limitToCallNextMonster = window.gameCanvas.height * frequency;
     this.sprite = this.getSprite();
   }
 
   getSprite(): Sprite {
     const maxWidth = window.gameCanvas.width - this.width;
-    const x = parseInt(Math.random() * maxWidth);
+    const x = Math.trunc(Math.random() * maxWidth);
     return Sprite({
       x,
       y: -80,
@@ -37,14 +39,17 @@ export default class BaseMonster {
     this.sprite.render();
   }
 
-  fall(): void {
+  fall(hero: Hero): void {
     this.sprite.update();
     this.sprite.y += 2 * this.verticalSpeed;
     this.restartWhenOutCanvas();
   }
 
   restartWhenOutCanvas(): void {
-    if (!this.nextMonsterCalled && this.sprite.y > this.nextMonsterLimit) {
+    if (
+      !this.nextMonsterCalled &&
+      this.sprite.y > this.limitToCallNextMonster
+    ) {
       this.nextMonsterCalled = true;
       emit("callNextMonster");
     }

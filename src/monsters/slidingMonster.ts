@@ -1,8 +1,9 @@
+import Hero from "../hero";
 import BaseMonster from "./base";
 import monster from "../assets/monster-2.svg";
 
 export default class SlidingMonster extends BaseMonster {
-  private readonly height = 65;
+  readonly height: number = 65;
   reverseDirection: boolean;
 
   constructor(...args: ConstructorParameters<typeof BaseMonster>) {
@@ -20,9 +21,9 @@ export default class SlidingMonster extends BaseMonster {
     this.sprite.render();
   }
 
-  fall(): void {
+  fall(hero: Hero): void {
     this.slideHorizontally();
-    super.fall();
+    super.fall(hero);
   }
 
   slideHorizontally(): void {

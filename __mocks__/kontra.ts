@@ -10,6 +10,11 @@ class FakeSprite {
 
 export const Sprite = jest.fn().mockImplementation((...args) => new FakeSprite(...args));
 
+export const SpriteSheet = jest.fn().mockImplementation((...args) => new FakeSprite(...args));
+
+export const on = jest.fn();
+
 export default jest.fn().mockImplementation(() => ({
-  Sprite
+  Sprite,
+  SpriteSheet
 }));

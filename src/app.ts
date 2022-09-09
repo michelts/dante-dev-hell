@@ -10,7 +10,7 @@ export default class App {
   private gameStatus: GameStatus = GameStatus.Stop;
   private screen: Screen;
 
-  private readonly movementDetector: MovementDetector;
+  private movementDetector: MovementDetector;
   private hero: Hero;
   private levels: Levels;
   private lifes: Lifes;
@@ -63,7 +63,7 @@ export default class App {
     on("gameComplete", this.completeGame.bind(this));
   }
 
-  private begin(evt, obj) {
+  private begin() {
     if (
       this.gameStatus !== GameStatus.Play &&
       this.gameStatus !== GameStatus.Pause
@@ -84,7 +84,6 @@ export default class App {
   }
 
   private reinitializeObjects() {
-    console.log('Reinitialize');
     if (this.levels) {
       this.levels.destroy();
     }

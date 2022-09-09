@@ -1,5 +1,4 @@
-import { Language } from "../types";
-import Level from "./level";
+import { Language, LevelParams } from "../types";
 
 const languagesByTier = [
   [
@@ -27,13 +26,7 @@ const languagesByTier = [
   ],
 ];
 
-export default function* generateLevels(): Iterator<Level, void, void> {
-  for (const params of generateLevelsParams()) {
-    yield new Level(params);
-  }
-}
-
-export function* generateLevelsParams(
+export default function* generateLevelsParams(
   shuffleFunction = shuffle
 ): Iterator<LevelParams, void, void> {
   const baseSpeed = 2;
@@ -56,7 +49,7 @@ export function* generateLevelsParams(
         monsterLevelWeightDecrement * levelIndex -
         monsterLevelWeightDecrement * tierIndex;
       yield {
-        language: languages[levelIndex],
+        language: languages[levelIndex] as Language,
         speed: baseSpeed + speedIncrement * tierIndex,
         frequency: baseFrequency - frequencyDecrement * levelIndex,
         monstersCount: baseMonstersCount + monstersCountIncrement * tierIndex,
@@ -66,12 +59,12 @@ export function* generateLevelsParams(
   }
 }
 
-function range(count) {
+function range(count: number): number[] {
   return Array(count)
     .fill(null)
     .map((_, index) => index);
 }
 
-function shuffle(inputArray) {
+function shuffle(inputArray: unknown[]) {
   return [...inputArray].sort(() => (Math.random() > 0.5 ? 1 : -1));
 }

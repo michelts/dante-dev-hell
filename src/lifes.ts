@@ -1,6 +1,7 @@
 import { Sprite, emit, on, off } from "kontra";
 
 export default class Lifes {
+  private readonly bindedDiscountLife;
   sprites: Sprite[];
   lifesCount = 3;
 

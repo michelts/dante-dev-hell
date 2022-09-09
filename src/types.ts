@@ -8,16 +8,30 @@ export enum GameStatus {
 
 export enum Language {
   Python,
-  Ruby,
   Javascript,
+  Ruby,
+  PHP,
+  Pascal,
+  Julia,
+
+  Java,
+  Go,
+  Typescript,
+  Dart,
+  Kotlin,
+  Swift,
+
   C,
   Malbolge,
   HolyC,
   Assembly,
+  COBOL,
 }
 
 export interface LevelParams {
   language: Language;
   speed: number;
   frequency: number;
+  monstersCount: number;
+  monsterLevelWeights: [number, number];
 }

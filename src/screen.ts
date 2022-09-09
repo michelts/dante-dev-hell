@@ -4,11 +4,16 @@ const infoRenderers = {
   [GameStatus.Stop]: renderNotStarted,
   [GameStatus.Complete]: renderComplete,
   [GameStatus.GameOver]: renderGameOver,
+  [GameStatus.Play]: null,
+  [GameStatus.Pause]: null,
 };
 
 export default class Screen {
+  infoLayer: HTMLDivElement;
+  currentGameStatus: GameStatus;
+
   constructor() {
-    this.infoLayer = document.getElementById("info");
+    this.infoLayer = document.getElementById("info") as HTMLDivElement;
   }
 
   render(newGameStatus: GameStatus): void {
@@ -29,7 +34,7 @@ export default class Screen {
 
   private renderInfo() {
     const renderFunc = infoRenderers[this.currentGameStatus];
-    if (renderFunc !== undefined) {
+    if (renderFunc !== null) {
       this.infoLayer.innerHTML = renderFunc();
     }
   }
