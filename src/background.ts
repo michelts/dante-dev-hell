@@ -41,7 +41,7 @@ export default class Background {
       render: function () {
         renderShadow(this.context);
       },
-      dy: 4,
+      dy: 1,
     });
   }
 

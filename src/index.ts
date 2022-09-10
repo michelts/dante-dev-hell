@@ -1,10 +1,12 @@
 import { init, initKeys, initPointer } from "kontra";
 import App from "./app";
+import FlashLib from "./flash";
 import "./style.scss";
 
 declare global {
   interface Window {
     gameCanvas: HTMLCanvasElement;
+    flashLib: FlashLib;
   }
 }
 
@@ -35,6 +37,7 @@ function isPortrait() {
 }
 
 window.gameCanvas = initCanvas();
+window.flashLib = new FlashLib();
 
 const app = new App();
 app.init();

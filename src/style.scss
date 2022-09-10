@@ -29,6 +29,7 @@ u {
 }
 canvas {
   display: block;
+  pointer-events: auto;
 }
 .layers {
   position: relative;
@@ -46,8 +47,8 @@ canvas {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  background: navy;
   z-index: 1;
+  pointer-events: none;
 }
 .layer:first-child {
   visibility: visible;
@@ -55,7 +56,18 @@ canvas {
 .text {
   font-family: monospace;
   padding: 16px;
-  pointer-events: none;
-  z-index: 2;
+  z-index: 3;
   background: #222;
+}
+.flash {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 2rem;
+  color: #fff;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+  opacity: 0;
 }
