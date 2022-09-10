@@ -33,10 +33,14 @@ export default class Level {
     this.monsterLevelDistribution = monsterLevelDistribution;
     this.isAccomplished = false;
     this.background = new Background(this.language);
-    window.flashLib.write({
-      text: `${types.Language[this.language]} Hell`,
-      timeInSeconds: 2,
-      onDone: () => this.initializeMonsterGenerator(),
+    window.instructionsLib.toggle({
+      onDone: () => {
+        window.flashLib.write({
+          text: `${types.Language[this.language]} Hell`,
+          timeInSeconds: 2,
+          onDone: () => this.initializeMonsterGenerator(),
+        });
+      },
     });
     this.monsters = [];
     this.attachEventListeners();

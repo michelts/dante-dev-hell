@@ -102,6 +102,7 @@ export default class App {
 
   private stopGame() {
     this.gameStatus = types.GameStatus.Stop;
+    window.instructionsLib.reset();
   }
 
   private gameOver() {
