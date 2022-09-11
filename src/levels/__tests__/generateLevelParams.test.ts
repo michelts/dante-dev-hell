@@ -11,7 +11,7 @@ it("should 3 levels from each language tier", () => {
       language: Language.Python,
       frequency: 1,
       speed: 2,
-      monsterCount: 6,
+      monsterCount: 4,
       monsterLevelDistribution: [80, 20],
     },
   });
@@ -21,7 +21,7 @@ it("should 3 levels from each language tier", () => {
       language: Language.Javascript,
       frequency: 0.75,
       speed: 2,
-      monsterCount: 6,
+      monsterCount: 4,
       monsterLevelDistribution: [60, 40],
     },
   });
@@ -31,7 +31,7 @@ it("should 3 levels from each language tier", () => {
       language: Language.Ruby,
       frequency: 0.5,
       speed: 2,
-      monsterCount: 6,
+      monsterCount: 4,
       monsterLevelDistribution: [40, 60],
     },
   });
@@ -43,7 +43,7 @@ it("should 3 levels from each language tier", () => {
       language: Language.Java,
       frequency: 1,
       speed: 2.5,
-      monsterCount: 8,
+      monsterCount: 7,
       monsterLevelDistribution: [60, 40],
     },
   });
@@ -53,7 +53,7 @@ it("should 3 levels from each language tier", () => {
       language: Language.Go,
       frequency: 0.75,
       speed: 2.5,
-      monsterCount: 8,
+      monsterCount: 7,
       monsterLevelDistribution: [40, 60],
     },
   });
@@ -63,7 +63,7 @@ it("should 3 levels from each language tier", () => {
       language: Language.Typescript,
       frequency: 0.5,
       speed: 2.5,
-      monsterCount: 8,
+      monsterCount: 7,
       monsterLevelDistribution: [20, 80],
     },
   });

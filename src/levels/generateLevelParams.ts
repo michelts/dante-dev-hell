@@ -36,8 +36,8 @@ export default function* generateLevelsParams(
   const baseFrequency = 1;
   const frequencyDecrement = 0.25;
 
-  const baseMonstersCount = 6;
-  const monsterCountIncrement = 2;
+  const baseMonstersCount = 4;
+  const monsterCountIncrement = 3;
 
   const baseMonsterEasyPct = 80;
   const monsterLevelWeightDecrement = 20;
