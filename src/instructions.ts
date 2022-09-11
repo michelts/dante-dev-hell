@@ -5,19 +5,17 @@ export default class InstructionsLib {
   private readonly timeoutInSeconds = 650;
   private readonly staleTimeInSeconds = 2000;
   private readonly timeoutIds: TimeoutId[] = [];
-  private readonly hasBeenShownKey = "instrunctionsHaveBeenShown";
-
-  private get hasBeenShown(): boolean {
-    return Boolean(window.localStorage.getItem(this.hasBeenShownKey));
-  }
-
-  private set hasBeenShown(value: boolean) {
-    window.localStorage.setItem(this.hasBeenShownKey, true);
-  }
+  private hasBeenShown: boolean = false;
+  private readonly hasBeenShownKey = "DanteDevHell-Instructions";
 
   constructor() {
     this.container = document.getElementById("instructions") as HTMLElement;
     this.container.style.transition = `opacity ${this.timeoutInSeconds}ms`;
+    this.hasBeenShown = this.getHasBeenShownFromStorage();
+  }
+
+  private getHasBeenShownFromStorage(): boolean {
+    return Boolean(window.localStorage.getItem(this.hasBeenShownKey));
   }
 
   toggle({ onDone }: { onDone: () => void }): void {
@@ -31,7 +29,6 @@ export default class InstructionsLib {
   reset(): void {
     this.timeoutIds.forEach((timeoutId: TimeoutId) => clearTimeout(timeoutId));
     this.removeInstructions();
-    this.hasBeenShown = false;
   }
 
   private toggleAnimation(onDone: () => void) {
@@ -46,9 +43,14 @@ export default class InstructionsLib {
     this.timeoutIds.push(
       setTimeout(() => {
         this.hasBeenShown = true;
+        this.storeHasBeenShown();
         onDone();
       }, this.timeoutInSeconds * 2 + this.staleTimeInSeconds * 2)
     );
+  }
+
+  private storeHasBeenShown() {
+    window.localStorage.setItem(this.hasBeenShownKey, "true");
   }
 
   private addInstructions(direction: string) {
