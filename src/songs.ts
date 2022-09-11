@@ -1,4 +1,4 @@
-export function hit() {
+export function hit(): void {
   const audioCtx = new window.AudioContext();
   const gainNode = audioCtx.createGain();
   gainNode.connect(audioCtx.destination);

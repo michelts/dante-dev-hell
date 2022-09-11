@@ -21,6 +21,8 @@ module.exports = {
             additionalTestBlockFunctions: [],
           },
         ],
+        "@typescript-eslint/consistent-type-assertions": "warn",
+        "@typescript-eslint/strict-boolean-expressions": "warn",
       },
     },
     {
