@@ -42,27 +42,30 @@ export default class Screen {
 
 function renderNotStarted() {
   return `
-    <h1>Dante's Dev Hell</h1>
+    ${title}
     <p>You are Dante, a developer who died and went to <b>the Developer's Hell</b>.</p>
     <p>Yeah, how could you imagine those <u>silly jokes</u> about javascript would bring you there?</p>
-    <p>With the help of your mentor Virgilio, <i>seek your redemption</i> sailing the Acheron river through the deeps of the programming hell!</p>
+    <p>With the help of your mentor Virgilius Torvalds, <i>seek your redemption</i> sailing the Acheron river through the deeps of the Programming Hell!</p>
     <p><u>Tap or press any key to start</u></p>
   `;
 }
 
 function renderGameOver() {
   return `
-    <h1>Dante's Dev Hell</h1>
-    <p>No good! Your soul were consumed by the hatred against <i>PHP typing system</i>.</p>
+    ${title}
+    <p>No good! Your soul were consumed by the hatred against languages you don't even know.</p>
+    <p>You shall live in Hell refactoring the code you wrote 10 years ago... <b>FOREVER</b>!
     <p><u>Tap or press any key to try again</u></p>
   `;
 }
 
 function renderComplete() {
   return `
-    <h1>Dante's Dev Hell</h1>
+    ${title}
     <p>Congratulations! You crossed the <b>deeps of the Programming Hell</b> with resilience and perseverance.
-    <p>You got <i>your redemption</i> and may now live your life with kindness and respect to all the languages, even PHP.</p>
+    <p>You got <i>your redemption</i> and may now live your life with kindness and respect to all the languages.</p>
     <p><u>Tap or press any key to play again</u></p>
   `;
 }
+
+const title = "<h1>Dante's Dev Hell</h1>";
