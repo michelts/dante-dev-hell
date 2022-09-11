@@ -34,7 +34,6 @@ export default class Level {
     this.isAccomplished = false;
     this.background = new Background(this.language);
     this.monsters = [];
-    /*
     window.instructionsLib.toggle({
       onDone: () => {
         window.flashLib.write({
@@ -44,8 +43,6 @@ export default class Level {
         });
       },
     });
-    */
-    this.initializeMonsterGenerator();
     this.attachEventListeners();
   }
 

@@ -39,7 +39,7 @@ export default function* generateLevelsParams(
   const baseMonstersCount = 6;
   const monsterCountIncrement = 2;
 
-  const baseMonsterEasyPct = 100;
+  const baseMonsterEasyPct = 80;
   const monsterLevelWeightDecrement = 20;
 
   for (const tierIndex of utils.range(3)) {

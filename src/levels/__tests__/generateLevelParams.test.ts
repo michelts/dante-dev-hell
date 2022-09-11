@@ -12,7 +12,7 @@ it("should 3 levels from each language tier", () => {
       frequency: 1,
       speed: 2,
       monsterCount: 6,
-      monsterLevelDistribution: [100, 0],
+      monsterLevelDistribution: [80, 20],
     },
   });
   expect(generator.next()).toEqual({
@@ -22,7 +22,7 @@ it("should 3 levels from each language tier", () => {
       frequency: 0.75,
       speed: 2,
       monsterCount: 6,
-      monsterLevelDistribution: [80, 20],
+      monsterLevelDistribution: [60, 40],
     },
   });
   expect(generator.next()).toEqual({
@@ -32,7 +32,7 @@ it("should 3 levels from each language tier", () => {
       frequency: 0.5,
       speed: 2,
       monsterCount: 6,
-      monsterLevelDistribution: [60, 40],
+      monsterLevelDistribution: [40, 60],
     },
   });
 
@@ -44,7 +44,7 @@ it("should 3 levels from each language tier", () => {
       frequency: 1,
       speed: 2.5,
       monsterCount: 8,
-      monsterLevelDistribution: [80, 20],
+      monsterLevelDistribution: [60, 40],
     },
   });
   expect(generator.next()).toEqual({
@@ -54,7 +54,7 @@ it("should 3 levels from each language tier", () => {
       frequency: 0.75,
       speed: 2.5,
       monsterCount: 8,
-      monsterLevelDistribution: [60, 40],
+      monsterLevelDistribution: [40, 60],
     },
   });
   expect(generator.next()).toEqual({
@@ -64,7 +64,7 @@ it("should 3 levels from each language tier", () => {
       frequency: 0.5,
       speed: 2.5,
       monsterCount: 8,
-      monsterLevelDistribution: [40, 60],
+      monsterLevelDistribution: [20, 80],
     },
   });
 
@@ -76,7 +76,7 @@ it("should 3 levels from each language tier", () => {
       frequency: 1,
       speed: 3,
       monsterCount: 10,
-      monsterLevelDistribution: [60, 40],
+      monsterLevelDistribution: [40, 60],
     },
   });
   expect(generator.next()).toEqual({
@@ -86,7 +86,7 @@ it("should 3 levels from each language tier", () => {
       frequency: 0.75,
       speed: 3,
       monsterCount: 10,
-      monsterLevelDistribution: [40, 60],
+      monsterLevelDistribution: [20, 80],
     },
   });
   expect(generator.next()).toEqual({
@@ -96,7 +96,7 @@ it("should 3 levels from each language tier", () => {
       frequency: 0.5,
       speed: 3,
       monsterCount: 10,
-      monsterLevelDistribution: [20, 80],
+      monsterLevelDistribution: [0, 100],
     },
   });
 
