@@ -4,8 +4,16 @@ export default class InstructionsLib {
   private container: HTMLElement;
   private readonly timeoutInSeconds = 650;
   private readonly staleTimeInSeconds = 2000;
-  private hasBeenShown = false;
   private readonly timeoutIds: TimeoutId[] = [];
+  private readonly hasBeenShownKey = "instrunctionsHaveBeenShown";
+
+  private get hasBeenShown(): boolean {
+    return Boolean(window.localStorage.getItem(this.hasBeenShownKey));
+  }
+
+  private set hasBeenShown(value: boolean) {
+    window.localStorage.setItem(this.hasBeenShownKey, true);
+  }
 
   constructor() {
     this.container = document.getElementById("instructions") as HTMLElement;
