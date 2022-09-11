@@ -1,5 +1,6 @@
 import { Sprite, SpriteSheet, collides, emit, on, off } from "kontra";
 import * as types from "./types";
+import * as songs from "./songs";
 import boat from "./assets/boat.svg";
 
 export default class Hero implements types.Hero {
@@ -89,6 +90,7 @@ export default class Hero implements types.Hero {
         this.isColliding = true;
         this.collisionAnimationTimeout = 30;
         this.sprite.playAnimation("flash");
+        songs.hit();
       }
     } else {
       this.isColliding = false;
