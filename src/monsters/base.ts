@@ -81,7 +81,12 @@ export default class BaseMonster implements types.Monster {
     );
   }
 
-  private placeEye(ctx: CanvasRenderingContext2D, x: number, y: number, rotation: number): void {
+  private placeEye(
+    ctx: CanvasRenderingContext2D,
+    x: number,
+    y: number,
+    rotation: number
+  ): void {
     [
       ["blur(2px)", "#000"],
       ["none", "#333"],

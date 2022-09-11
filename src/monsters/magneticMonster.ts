@@ -3,7 +3,7 @@ import Hero from "../hero";
 import BaseMonster from "./base";
 
 export default class MagneticMonster extends BaseMonster {
-  private slideSpeed: number;
+  private readonly slideSpeed: number;
   protected defaultEyeRotation = types.EyeRotation.Inverse;
   protected eyesLeft = 11;
   protected eyesGap = 12;

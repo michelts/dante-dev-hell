@@ -107,6 +107,6 @@ it("should 3 levels from each language tier", () => {
   });
 });
 
-function fakeShuffle(inputArray: unknown[]) {
+function fakeShuffle<T>(inputArray: T[]): T[] {
   return inputArray;
 }

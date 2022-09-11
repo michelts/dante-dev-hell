@@ -50,7 +50,7 @@ export default function* generateLevelsParams(
         monsterLevelWeightDecrement * levelIndex -
         monsterLevelWeightDecrement * tierIndex;
       yield {
-        language: languages[levelIndex] as Language,
+        language: languages[levelIndex],
         speed: baseSpeed + speedIncrement * tierIndex,
         frequency: baseFrequency - frequencyDecrement * levelIndex,
         monsterCount: baseMonstersCount + monsterCountIncrement * tierIndex,

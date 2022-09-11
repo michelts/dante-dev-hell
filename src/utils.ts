@@ -4,6 +4,6 @@ export function range(count: number): number[] {
     .map((_, index) => index);
 }
 
-export function shuffle(inputArray: unknown[]) {
+export function shuffle<T>(inputArray: T[]): T[] {
   return [...inputArray].sort(() => (Math.random() > 0.5 ? 1 : -1));
 }
