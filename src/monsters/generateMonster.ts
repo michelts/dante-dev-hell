@@ -9,8 +9,7 @@ type RandomNumberFunc = () => number;
 type LevelDistribution = [number, number];
 
 const defaultMonstersByLevel: types.MonsterConstructor[][] = [
-  // [FallingMonster, SlidingMonster],
-  [FallingMonster],
+  [FallingMonster, SlidingMonster],
   [MagneticMonster, TeleportingMonster],
 ];
 
