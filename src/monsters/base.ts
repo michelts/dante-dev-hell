@@ -1,7 +1,6 @@
 import { Sprite, emit } from "kontra";
 import { Monster } from "../types";
 import Hero from "../hero";
-import monster from "../assets/monster-1.svg";
 
 export default class BaseMonster implements Monster {
   readonly width: number = 100;
@@ -19,21 +18,21 @@ export default class BaseMonster implements Monster {
   }
 
   getSprite(): Sprite {
-    const maxWidth = window.gameCanvas.width - this.width;
-    const x = Math.trunc(Math.random() * maxWidth);
     return Sprite({
-      x,
-      y: -80,
+      ...this.getInitialPosition(),
       width: this.width,
       height: this.height,
       image: this.image(),
     });
   }
 
+  protected getInitialPosition(): { x: number; y: number } {
+    const maxWidth = window.gameCanvas.width - this.width;
+    return { x: Math.trunc(Math.random() * maxWidth), y: -1 * this.height };
+  }
+
   image(): HTMLImageElement {
-    const img = new Image(this.width, this.height);
-    img.src = monster;
-    return img;
+    throw new Error("Not Implemented");
   }
 
   render(): void {
