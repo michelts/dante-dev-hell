@@ -5,6 +5,8 @@ import boat from "./assets/boat.svg";
 
 export default class Hero implements types.Hero {
   private readonly bindedHandleHeroMoved;
+  private readonly width = 50;
+  private readonly height = 100;
   sprite: Sprite;
   spriteSheet: SpriteSheet;
   speed = 3;
@@ -31,13 +33,11 @@ export default class Hero implements types.Hero {
   }
 
   private createSprites() {
-    const width = 30;
-    const height = 60;
-    const margin = 20;
+    const margin = 30;
     this.spriteSheet = SpriteSheet({
       image: this.image(),
-      frameWidth: width,
-      frameHeight: height,
+      frameWidth: this.width,
+      frameHeight: this.height,
       animations: {
         default: {
           frames: [0],
@@ -49,10 +49,10 @@ export default class Hero implements types.Hero {
       },
     });
     this.sprite = Sprite({
-      x: (window.gameCanvas.width - width) / 2,
-      y: window.gameCanvas.height - height - margin,
-      width,
-      height,
+      x: (window.gameCanvas.width - this.width) / 2,
+      y: window.gameCanvas.height - this.height - margin,
+      width: this.width,
+      height: this.height,
       anchor: { x: 0, y: 0 },
       spriteSheet: this.spriteSheet,
       animations: this.spriteSheet.animations,
@@ -60,7 +60,7 @@ export default class Hero implements types.Hero {
   }
 
   image(): HTMLImageElement {
-    const img = new Image(60, 30);
+    const img = new Image(this.height, this.width);
     img.src = boat;
     return img;
   }
