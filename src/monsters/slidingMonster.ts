@@ -4,9 +4,9 @@ import BaseMonster from "./base";
 
 export default class SlidingMonster extends BaseMonster {
   private reverseDirection: boolean;
-  private readonly defaultEyeRotation = types.EyeRotation.Inverse;
-  private readonly eyesLeft = 13;
-  private readonly eyesGap = 9;
+  protected readonly defaultEyeRotation = types.EyeRotation.Inverse;
+  protected readonly eyesLeft = 13;
+  protected readonly eyesGap = 9;
 
   constructor(...args: ConstructorParameters<typeof BaseMonster>) {
     super(...args);

@@ -1,12 +1,21 @@
+import { Sprite } from "kontra";
+import * as utils from "../utils";
 import Hero from "../hero";
 import BaseMonster from "./base";
 
 export default class TeleportingMonster extends BaseMonster {
   private readonly threshold: number;
   private teleported: boolean = false;
-  private readonly eyesTop = 21;
-  private readonly eyesLeft = 11;
-  private readonly eyesGap = 10;
+  protected readonly eyesTop = 21;
+  protected readonly eyesLeft = 11;
+  protected readonly eyesGap = 10;
+
+  private smoke: Sprite;
+  private smokeLeft = 0;
+  private smokeColor: string;
+  private smokeBlur: string;
+  private smokeTransition: number[] = [];
+  private readonly smokeTransitionSteps = 30;
 
   constructor(...args: ConstructorParameters<typeof BaseMonster>) {
     super(...args);
@@ -15,6 +24,24 @@ export default class TeleportingMonster extends BaseMonster {
     const incrementRate = 0.2;
     this.threshold =
       baseDistance * (1 + incrementRate * (this.verticalSpeed - baseSpeed));
+
+    const bindedCreateSmokeSprite = this.createSmokeSprite.bind(this);
+    this.smoke = Sprite({
+      x: 100,
+      y: 100,
+      width: this.width,
+      height: this.height,
+      render: function () {
+        bindedCreateSmokeSprite(this.context);
+      },
+    });
+  }
+
+  render(): void {
+    if (this.teleported && this.smokeTransition.length > 0) {
+      this.renderSmoke();
+    }
+    super.render();
   }
 
   fall(hero: Hero): void {
@@ -39,7 +66,34 @@ export default class TeleportingMonster extends BaseMonster {
     const heroCenter = hero.sprite.x + hero.sprite.width / 2;
     const newLeftPosition = heroCenter - this.sprite.width / 2;
     const maxPosition = window.gameCanvas.width - this.sprite.width;
+    this.createSmokeTransition();
     this.sprite.x = Math.min(Math.max(0, newLeftPosition), maxPosition); // clamp
     this.teleported = true;
+  }
+
+  private createSmokeSprite(ctx: CanvasRenderingContext2D) {
+    this.setScale(ctx);
+    const path = new Path2D(this.getImagePath());
+    ctx.filter = this.smokeBlur;
+    ctx.fillStyle = this.smokeColor;
+    ctx.fill(path);
+  }
+
+  private createSmokeTransition() {
+    this.smokeLeft = this.sprite.x;
+    this.smokeTransition = utils.range(this.smokeTransitionSteps);
+  }
+
+  private renderSmoke() {
+    this.smoke.x = this.smokeLeft;
+    this.smoke.y = this.sprite.y;
+    const smokeStep = this.smokeTransition.splice(0, 1)[0];
+    const smokePct =
+      (this.smokeTransitionSteps - smokeStep) / this.smokeTransitionSteps;
+    const smokeOpacity = smokePct / 2;
+    const smokeBlurLevel = 6 / smokePct;
+    this.smokeColor = `rgba(0, 0, 0, ${smokeOpacity})`;
+    this.smokeBlur = `blur(${smokeBlurLevel}px)`;
+    this.smoke.render();
   }
 }

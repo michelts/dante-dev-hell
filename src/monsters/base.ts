@@ -40,15 +40,19 @@ export default class BaseMonster implements types.Monster {
     return { x: Math.trunc(Math.random() * maxWidth), y: -1 * this.height };
   }
 
-  private renderImage(ctx): void {
-    // Paths have 35x50px - we adjust it to fit 54x70
-    ctx.scale(1.4, 1.4);
+  private renderImage(ctx: CanvasRenderingContext2D): void {
+    this.setScale(ctx);
     this.placeImage(ctx);
     this.placeEyes(ctx, 15, 15);
     this.placeShadow(ctx);
   }
 
-  private placeImage(ctx): void {
+  protected setScale(ctx: CanvasRenderingContext2D): void {
+    // Paths have 35x50px - we adjust it to fit 54x70
+    ctx.scale(1.4, 1.4);
+  }
+
+  private placeImage(ctx: CanvasRenderingContext2D): void {
     const path = new Path2D(this.getImagePath());
     ctx.filter = "drop-shadow(3px 3px 3px rgba(0,0,0,0.3)";
     ctx.fillStyle = "#000";
@@ -62,7 +66,7 @@ export default class BaseMonster implements types.Monster {
     ctx.stroke(path);
   }
 
-  private placeEyes(ctx, x: number, y: number): void {
+  private placeEyes(ctx: CanvasRenderingContext2D, x: number, y: number): void {
     this.placeEye(
       ctx,
       this.eyesLeft,
@@ -77,7 +81,7 @@ export default class BaseMonster implements types.Monster {
     );
   }
 
-  private placeEye(ctx, x: number, y: number, rotation: number): void {
+  private placeEye(ctx: CanvasRenderingContext2D, x: number, y: number, rotation: number): void {
     [
       ["blur(2px)", "#000"],
       ["none", "#333"],
@@ -93,7 +97,7 @@ export default class BaseMonster implements types.Monster {
     });
   }
 
-  private placeShadow(ctx): void {
+  private placeShadow(ctx: CanvasRenderingContext2D): void {
     const shadow = new Path2D(this.getShadowPath());
     ctx.fillStyle = "rgba(0,0,0,0.3)";
     ctx.fill(shadow);

@@ -1,9 +1,11 @@
+type TimeoutId = ReturnType<typeof setTimeout>;
+
 export default class InstructionsLib {
   private container: HTMLElement;
   private readonly timeoutInSeconds = 650;
   private readonly staleTimeInSeconds = 2000;
   private hasBeenShown = false;
-  private readonly timeoutIds: number[] = [];
+  private readonly timeoutIds: TimeoutId[] = [];
 
   constructor() {
     this.container = document.getElementById("instructions") as HTMLElement;
@@ -19,12 +21,12 @@ export default class InstructionsLib {
   }
 
   reset(): void {
-    this.timeoutIds.forEach((timeoutId: number) => clearTimeout(timeoutId));
+    this.timeoutIds.forEach((timeoutId: TimeoutId) => clearTimeout(timeoutId));
     this.removeInstructions();
     this.hasBeenShown = false;
   }
 
-  private toggleAnimation(onDone) {
+  private toggleAnimation(onDone: () => void) {
     this.addInstructions("left");
 
     this.timeoutIds.push(
@@ -43,11 +45,11 @@ export default class InstructionsLib {
 
   private addInstructions(direction: string) {
     this.container.appendChild(this.getContent(direction));
-    this.container.style.opacity = 1;
+    this.container.style.opacity = "1";
 
     this.timeoutIds.push(
       setTimeout(() => {
-        this.container.style.opacity = 0;
+        this.container.style.opacity = "0";
       }, this.staleTimeInSeconds)
     );
 
@@ -59,7 +61,7 @@ export default class InstructionsLib {
   }
 
   private removeInstructions() {
-    this.container.style.opacity = 0;
+    this.container.style.opacity = "0";
     this.container.innerHTML = "";
   }
 

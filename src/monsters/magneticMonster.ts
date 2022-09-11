@@ -4,9 +4,9 @@ import BaseMonster from "./base";
 
 export default class MagneticMonster extends BaseMonster {
   private slideSpeed: number;
-  private eyesLeft = 11;
-  private eyesGap = 12;
-  private defaultEyeRotation = types.EyeRotation.Inverse;
+  protected defaultEyeRotation = types.EyeRotation.Inverse;
+  protected eyesLeft = 11;
+  protected eyesGap = 12;
 
   constructor(...args: ConstructorParameters<typeof BaseMonster>) {
     super(...args);

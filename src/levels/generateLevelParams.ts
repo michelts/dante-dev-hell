@@ -1,4 +1,5 @@
 import { Language, LevelParams } from "../types";
+import * as utils from "../utils";
 
 const languagesByTier = [
   [
@@ -27,7 +28,7 @@ const languagesByTier = [
 ];
 
 export default function* generateLevelsParams(
-  shuffleFunction = shuffle
+  shuffleFunction = utils.shuffle
 ): Iterator<LevelParams, void, void> {
   const baseSpeed = 2;
   const speedIncrement = 0.5;
@@ -41,9 +42,9 @@ export default function* generateLevelsParams(
   const baseMonsterEasyPct = 100;
   const monsterLevelWeightDecrement = 20;
 
-  for (const tierIndex of range(3)) {
+  for (const tierIndex of utils.range(3)) {
     const languages = shuffleFunction(languagesByTier[tierIndex]);
-    for (const levelIndex of range(3)) {
+    for (const levelIndex of utils.range(3)) {
       const monsterEasyPct =
         baseMonsterEasyPct -
         monsterLevelWeightDecrement * levelIndex -
@@ -57,14 +58,4 @@ export default function* generateLevelsParams(
       };
     }
   }
-}
-
-function range(count: number): number[] {
-  return Array(count)
-    .fill(null)
-    .map((_, index) => index);
-}
-
-function shuffle(inputArray: unknown[]) {
-  return [...inputArray].sort(() => (Math.random() > 0.5 ? 1 : -1));
 }
