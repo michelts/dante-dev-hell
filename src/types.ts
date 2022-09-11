@@ -58,3 +58,8 @@ export interface Monster {
   fall: (hero: Hero) => void;
   sprite: Sprite;
 }
+
+export enum EyeRotation {
+  Direct = 1,
+  Inverse = -1,
+}
