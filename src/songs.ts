@@ -1,4 +1,16 @@
+let isPlaying = false;
+
 export function hit(): void {
+  if (!isPlaying) {
+    isPlaying = true;
+    playHit();
+    setTimeout(() => {
+      isPlaying = false;
+    }, [500]);
+  }
+}
+
+export function playHit(): void {
   const audioCtx = new window.AudioContext();
   const gainNode = audioCtx.createGain();
   gainNode.connect(audioCtx.destination);
