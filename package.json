@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "rollup -c rollup.config.js --environment BUILD:dev -w",
-    "build": "rollup -c rollup.config.js --environment BUILD:prod && zip -9 -r dist.zip dist/ && du -b dist.zip",
+    "build": "rollup -c rollup.config.js --environment BUILD:prod && cd dist/ && zip -9 -r ../dist.zip ./ && du -b ../dist.zip",
     "test": "jest",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit --skipLibCheck"
